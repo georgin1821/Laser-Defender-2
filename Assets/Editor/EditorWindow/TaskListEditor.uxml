@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/EditorWindow/TaskListEditor.uss?fileID=7433441132597879392&amp;guid=97de6ea0c72688b40af6f51dc2a9bee4&amp;type=3#TaskListEditor" />
+    <ui:VisualElement name="LoadingTasks">
+        <uie:ObjectField label="Load Saved Tasks" name="savedTasksObjectField" />
+        <uie:ObjectField label="Load Saved Tasks" name="testObject" />
+        <ui:Button text="Load Task" display-tooltip-when-elided="true" name="loadTasksBtn" />
+    </ui:VisualElement>
+    <ui:VisualElement name="AddingTasks">
+        <ui:Label text="Add New Task" display-tooltip-when-elided="true" name="addTaskskHeader" />
+        <ui:TextField picking-mode="Ignore" text="New Task" name="taskText" />
+        <ui:Button text="Add" display-tooltip-when-elided="true" name="addTaskBtn" />
+    </ui:VisualElement>
+    <ui:VisualElement name="DisplayingTasks">
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="DisplayingTasksScroll">
+            <ui:Toggle />
+        </ui:ScrollView>
+    </ui:VisualElement>
+    <ui:VisualElement name="trackingTasks">
+        <ui:Button text="Save progress" display-tooltip-when-elided="true" name="savedProgressBtn" />
+        <ui:ProgressBar title="my-progress" name="taskProgress" />
+    </ui:VisualElement>
+</ui:UXML>

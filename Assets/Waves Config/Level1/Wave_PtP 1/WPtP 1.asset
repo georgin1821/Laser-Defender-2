@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acba9e8e3bd6bad48a87383286decde6, type: 3}
+  m_Name: WPtP 1
+  m_EditorClassIdentifier: 
+  divisions:
+  - {fileID: 5049398550342009626, guid: cd156cbbccd2d3745990310ad375a72a, type: 3}
+  spawnDelay: 0

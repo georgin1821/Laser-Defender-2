@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - FxTemporaire
+  - Enemy
+  - waypoint
+  - Projectile
+  - Power
+  - lockIcon
+  - levelText
+  - levelBtn
+  - gunUpgrade
+  - gainRockets
+  - shield
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Enemy
+  - Water
+  - UI
+  - Player
+  - PlayerProjectile
+  - EnemyProjectile
+  - Powers
+  - Shreder
+  - PlayerProjectileLong
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 1
+  - name: UI
+    uniqueID: 863507103
+    locked: 0
+  - name: Player
+    uniqueID: 562266027
+    locked: 0

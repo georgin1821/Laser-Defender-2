@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9025272162233380950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9025272162233380948}
+  - component: {fileID: 9025272162233380949}
+  - component: {fileID: 3776361749122958984}
+  - component: {fileID: 1140825770610722692}
+  - component: {fileID: 3837460776482167722}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9025272162233380948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025272162233380950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: -5, z: -30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9025272162233380949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025272162233380950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dffe3086ba1ba40a22f4863a005611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedShip: 0
+  coins: 0
+  gems: 0
+  batteryLife: 0
+  isGameStartedFirstTime: 0
+  levels: 
+  ships: 
+  shipsPower: 
+  shipsRank: 
+  enemiesKilled: 0
+  musicVolume: 0
+  soundVolume: 0
+  currentDifficulty: 0
+  dailyRewards: 
+--- !u!114 &3776361749122958984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025272162233380950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ac1e17baac50a408907cca36715f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpeedLevel: 1
+  loadingFrom: 0
+--- !u!114 &1140825770610722692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025272162233380950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664bbc0c99ae8f44aaf7a118366227ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questList:
+  - progress: 1
+    title: Enemies Killed
+    itemReward: gols
+    questObjective: Kill 1000 enemies
+    id: 1
+    questObjectiveCount: 1000
+    questObjectiveRequirement: 0
+    nextQuest: 0
+    goldReward: 100
+  currentQuestList:
+  - progress: 1
+    title: 
+    itemReward: iii
+    questObjective: 
+    id: 0
+    questObjectiveCount: 0
+    questObjectiveRequirement: 0
+    nextQuest: 0
+    goldReward: 0
+--- !u!114 &3837460776482167722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025272162233380950}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64a9edc3a667634ab2a11249f53f103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardsChecked: 
+  dailyRewardsReady: 0
