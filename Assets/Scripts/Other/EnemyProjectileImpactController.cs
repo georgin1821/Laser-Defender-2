@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyProjectileImpactController : MonoBehaviour
 {
 
-    [SerializeField] int damage = 100;
+    [SerializeField] int damage = 100; /// <summary>
+    /// ? needs that?
+    /// </summary>
     [SerializeField] AudioType audioType;
 
     private void Start()
@@ -34,7 +36,7 @@ public class EnemyProjectileImpactController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Player.Instance.DamagePlayer(damage);
+            Player.Instance.DamagePlayer();
             VFXController.instance.EnemyLaserImpact(transform);
 
             if (audioType != AudioType.None)

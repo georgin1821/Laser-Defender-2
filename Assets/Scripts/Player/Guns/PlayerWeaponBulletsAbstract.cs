@@ -26,17 +26,6 @@ public abstract class PlayerWeaponBulletsAbstract : IPlayerWeapon
     [SerializeField] protected PlayerProjectile projectile;
     public int bulletVelocity;
 
-    [SerializeField, Range(1, 10)] private int gunUpgrades;
-    public int GunUpgrades
-    {
-        //starting from 1 to 10
-        get { return gunUpgrades; }
-        set
-        {
-            gunUpgrades = value;
-            if (gunUpgrades > 10) gunUpgrades = 10;
-        }
-    }
     protected abstract void InstatiateProjectiles(int upgrades);
     protected virtual void Shooting()
     {
@@ -44,7 +33,7 @@ public abstract class PlayerWeaponBulletsAbstract : IPlayerWeapon
         {
             nextShotTime = Time.time + msBetweenShots / 1000;
 
-            InstatiateProjectiles(GunUpgrades);
+            InstatiateProjectiles(WeaponUpgrades);
         }
     }
 
@@ -65,11 +54,10 @@ public abstract class PlayerWeaponBulletsAbstract : IPlayerWeapon
     }
     private void Update()
     {
-        if (GamePlayController.Instance.state != GameState.PLAY || isBurstShooting)
+        if (GamePlayController.Instance.state != GameState.PLAY || isBurstShooting || !Player.Instance.isAbleToFire)
         {
             return;
         }
-
         if (isAlwaysShooting)
         {
             Shooting();

@@ -11,7 +11,7 @@ public class Player : SimpleSingleton<Player>, IDamageable
 {
 
     [Header("VFX")]
-    [SerializeField] ParticleSystem engineFlames;
+    [SerializeField] ParticleSystem engineVFX;
     [SerializeField] ParticleSystem shootingFlames;
     [SerializeField] GameObject rocketPrefab;
 
@@ -19,39 +19,29 @@ public class Player : SimpleSingleton<Player>, IDamageable
     [Header("GameDev Settings")]
     public bool isAlwaysShooting = true;
     [SerializeField] bool collideWithEnemy = true;
+    public bool isAbleToFire = true;
 
-    [Tooltip("Fire position")]
+    [Tooltip("Shooting")]
     public Transform firePos;
-    [SerializeField] GameObject shieldsVFX;
-    GameObject redFlashImage;
+    private int rocketsShooting = 7;
+    private float arcAngle = 40;
+    public GameObject[] targets; //to  be hide from inspector
 
     private AudioSource audioSource;
-    Animator anim;
-    float arcAngle = 40;
+    private Animator anim;
     private bool playerHasShield;
-    bool isGameStatePLAY;
-    Coroutine co;
-    GameObject shields;
-    public int Health = 100;
-    public GameObject[] Targets { get; set; }
-    //
+    private Coroutine co;
+    private IPlayerWeapon[] weapons;
     private int gunUpgrades = 1;
-    public int GunUpgrades
-    {
-        get { return gunUpgrades; }
-        set
-        {
-            gunUpgrades = value;
-        }
-    }
+    private int shieldsDuration = 5;
 
-   override protected void Awake()
+    override protected void Awake()
     {
         base.Awake();
 
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-        redFlashImage = GameObject.Find("Red Flash");
+        weapons = GetComponents<IPlayerWeapon>();
     }
     private void OnEnable()
     {
@@ -73,18 +63,23 @@ public class Player : SimpleSingleton<Player>, IDamageable
     {
         StopShootingClip();
         audioSource.loop = true;
-        GameUIController.Instance.SetPlayerStatus();
+        targets = new GameObject[rocketsShooting];
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            FireRockets();
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
         {
+            if (!collideWithEnemy || playerHasShield) return;
             if (GamePlayController.Instance.state == GameState.PLAY && other.tag == "Enemy")
             {
-                if (!collideWithEnemy || playerHasShield) return;
-                {
-                    redFlashImage.GetComponent<RedFlashAnim>().Flash();
-                    PlayerDeath();
-                }
+                PlayerDeath();
             }
         }
     }
@@ -98,7 +93,7 @@ public class Player : SimpleSingleton<Player>, IDamageable
     {
         GamePlayController.Instance.UpdateState(GameState.PLAYERDEATH);
         AudioController.Instance.PlayAudio(AudioType.PlayerDeath);
-       // Destroy(gameObject);
+        Destroy(gameObject);
     }
     void GameStateChangeHandle(GameState state)
     {
@@ -106,32 +101,28 @@ public class Player : SimpleSingleton<Player>, IDamageable
 
         if (state == GameState.PLAY)
         {
-            //gameObject.transform.localScale = new Vector3(1, 1, 1);
             audioSource.Play();
-            engineFlames.Play();
+            engineVFX.Play();
             shootingFlames.Play();
         }
         if (state == GameState.INIT)
         {
-            gunUpgrades = 1;
-            PlayerWeaponBulletsAbstract[] guns = GetComponents<PlayerWeaponBulletsAbstract>();
-            foreach (var gun in guns)
+            foreach (var weapon in weapons)
             {
-                gun.GunUpgrades = gunUpgrades;
+                weapon.WeaponUpgrades = 1;
             }
-
         }
     }
     public void FireRockets()
     {
         if (GamePlayController.Instance.state == GameState.PLAY)
         {
-            for (int i = 0; i < 6; i++)
+            targets = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < rocketsShooting; i++)
             {
-                GameObject rocket = Instantiate(rocketPrefab, firePos.position, transform.rotation);
+                GameObject rocket = Instantiate(rocketPrefab, firePos.position, Quaternion.identity);
                 rocket.transform.Rotate(0, 0, arcAngle - i * 15);
                 AudioController.Instance.PlayAudio(AudioType.PalyerShootRockets);
-                Targets = GameObject.FindGameObjectsWithTag("Enemy");
             }
         }
     }
@@ -143,7 +134,6 @@ public class Player : SimpleSingleton<Player>, IDamageable
             if (co != null)
             {
                 StopCoroutine(co);
-                Destroy(shields);
             }
             co = StartCoroutine(ShieldsCountDown());
         }
@@ -153,36 +143,26 @@ public class Player : SimpleSingleton<Player>, IDamageable
     {
         if (GamePlayController.Instance.state == GameState.PLAY)
         {
-            if (gunUpgrades < 9)
+            foreach (var weapon in weapons)
             {
-                gunUpgrades++;
-                PlayerWeaponBulletsAbstract[] guns = GetComponents<PlayerWeaponBulletsAbstract>();
-                foreach (var gun in guns)
-                {
-                    gun.GunUpgrades = gunUpgrades;
-                }
-                GameUIController.Instance.UpdateRankStatus();
+                weapon.WeaponUpgrades++;
+                gunUpgrades++; // the same ranks for all weapons and same maximum
             }
+
+            GameUIController.Instance.UpdateWeaponRankStatus(gunUpgrades);
         }
     }
 
-    public void DamagePlayer(int damage)
-    {
-        if (!playerHasShield)
-        {
-            Health -= damage;
-            GameUIController.Instance.UpdatePlayerHealthUI();
-            redFlashImage.GetComponent<RedFlashAnim>().Flash();
-            if (Health <= 0)
-            {
-                PlayerDeath();
-            }
-        }
 
+    public void DamagePlayer()
+    {
+        if (!collideWithEnemy || playerHasShield) return;
+
+        PlayerDeath();
     }
     public void PlayerAnimation()
     {
-        //Speed Level
+        //Speed Level debug
         if (GameManager.Instance.isSpeedLevel)
         {
             return;
@@ -195,12 +175,12 @@ public class Player : SimpleSingleton<Player>, IDamageable
     IEnumerator ShieldsCountDown()
     {
         playerHasShield = true;
-        shields = Instantiate(shieldsVFX, transform.position, Quaternion.identity);
-        shields.transform.SetParent(gameObject.transform);
+        GameObject shield = transform.Find("Shields").gameObject;
+        shield.SetActive(true);
         AudioController.Instance.PlayAudio(AudioType.PlayerShields);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(shieldsDuration);
         playerHasShield = false;
-        Destroy(shields);
+        shield.SetActive(false);
     }
 }
 

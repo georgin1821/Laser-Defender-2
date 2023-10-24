@@ -54,8 +54,9 @@ public class GameUIController : SimpleSingleton<GameUIController>
 
     #endregion Unity Functions
 
-    private void OnDestroy()
+    override protected void OnDestroy()
     {
+        base.OnDestroy();
         GamePlayController.OnGameStateChange -= OnGameStateChangeMenuActivation;
         continueBtn.onClick.RemoveListener(ReturnToGameAfterRevive);
     }
@@ -110,9 +111,9 @@ public class GameUIController : SimpleSingleton<GameUIController>
 
     public void UpdatePlayerHealthUI()
     {
-        int health = Player.Instance.Health;
-        healthText.text = "" + health;
-        healthSlider.value = health;
+        //int health = Player.Instance.Health;
+       // healthText.text = "" + health;
+       // healthSlider.value = health;
     }
 
     public void UpdateCoins(int coins, int coinsToAdd)
@@ -185,11 +186,11 @@ public class GameUIController : SimpleSingleton<GameUIController>
         introText.gameObject.SetActive(false);
     }
 
-    public void UpdateRankStatus()
+    public void UpdateWeaponRankStatus(int ranks)
     {
-        if (Player.Instance.GunUpgrades < 9)
+        if (ranks < 9)
         {
-            gunRankText.text = Player.Instance.GunUpgrades.ToString();
+            gunRankText.text = ranks.ToString();
         }
         else
         {
@@ -205,8 +206,8 @@ public class GameUIController : SimpleSingleton<GameUIController>
 
     public void SetPlayerStatus()
     {
-        healthSlider.maxValue = Player.Instance.Health;
-        healthSlider.value = Player.Instance.Health;
+        //healthSlider.maxValue = Player.Instance.Health;
+       // healthSlider.value = Player.Instance.Health;
     }
 
     private void ReturnToGameAfterRevive()
