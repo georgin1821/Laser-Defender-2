@@ -7,9 +7,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour, IDamageable
+public class Player : SimpleSingleton<Player>, IDamageable
 {
-    public static Player instance;
 
     [Header("VFX")]
     [SerializeField] ParticleSystem engineFlames;
@@ -21,12 +20,12 @@ public class Player : MonoBehaviour, IDamageable
     public bool isAlwaysShooting = true;
     [SerializeField] bool collideWithEnemy = true;
 
-    [Tooltip("Fire posiyion")]
+    [Tooltip("Fire position")]
     public Transform firePos;
     [SerializeField] GameObject shieldsVFX;
     GameObject redFlashImage;
 
-    AudioSource audioSource;
+    private AudioSource audioSource;
     Animator anim;
     float arcAngle = 40;
     private bool playerHasShield;
@@ -46,12 +45,9 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    private void Awake()
+   override protected void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        base.Awake();
 
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
@@ -59,7 +55,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     private void OnEnable()
     {
-        if (GamePlayController.Instance != null)
+        if (GamePlayController.IsInitialized)
         {
             GamePlayController.OnGameStateChange += GameStateChangeHandle;
         }
@@ -68,15 +64,16 @@ public class Player : MonoBehaviour, IDamageable
             Debug.Log("GamePlayController instance is null");
         }
     }
-    private void OnDestroy()
+    override protected void OnDestroy()
     {
+        base.OnDestroy();
         GamePlayController.OnGameStateChange -= GameStateChangeHandle;
     }
     private void Start()
     {
         StopShootingClip();
         audioSource.loop = true;
-        GameUIController.instance.SetPlayerStatus();
+        GameUIController.Instance.SetPlayerStatus();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -99,8 +96,9 @@ public class Player : MonoBehaviour, IDamageable
 
     private void PlayerDeath()
     {
-        GamePlayController.Instance.UpdateState(GameState.DEFEAT);
+        GamePlayController.Instance.UpdateState(GameState.PLAYERDEATH);
         AudioController.Instance.PlayAudio(AudioType.PlayerDeath);
+       // Destroy(gameObject);
     }
     void GameStateChangeHandle(GameState state)
     {
@@ -163,7 +161,7 @@ public class Player : MonoBehaviour, IDamageable
                 {
                     gun.GunUpgrades = gunUpgrades;
                 }
-                GameUIController.instance.UpdateRankStatus();
+                GameUIController.Instance.UpdateRankStatus();
             }
         }
     }
@@ -173,7 +171,7 @@ public class Player : MonoBehaviour, IDamageable
         if (!playerHasShield)
         {
             Health -= damage;
-            GameUIController.instance.UpdatePlayerHealthUI();
+            GameUIController.Instance.UpdatePlayerHealthUI();
             redFlashImage.GetComponent<RedFlashAnim>().Flash();
             if (Health <= 0)
             {

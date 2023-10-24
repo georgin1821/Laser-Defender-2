@@ -23,14 +23,14 @@ public class CoinController : MonoBehaviour
     void Update()
     {
         {
-            if (Vector3.Distance(Player.instance.transform.position, this.transform.position) > playerRange)
+            if (Vector3.Distance(Player.Instance.transform.position, this.transform.position) > playerRange)
             {
                 speed = Mathf.Clamp(speed + (accelaration * Time.deltaTime), -1f, 5f);
                 transform.Translate(new Vector3(0, -forwardSpeed, 0) * speed * Time.deltaTime);
             }
             else
             {
-                Vector3 target = Player.instance.transform.position;
+                Vector3 target = Player.Instance.transform.position;
                 transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime, 15);
             }
         }
@@ -46,7 +46,7 @@ public class CoinController : MonoBehaviour
             int currentCoins = GameDataManager.Instance.coins;
             GameDataManager.Instance.coins += 100;
             GamePlayController.Instance.levelCoins += 100;
-            GameUIController.instance.UpdateCoins(currentCoins, GameDataManager.Instance.coins);
+            GameUIController.Instance.UpdateCoins(currentCoins, GameDataManager.Instance.coins);
         }
     }
 

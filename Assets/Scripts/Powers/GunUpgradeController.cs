@@ -7,6 +7,6 @@ public class GunUpgradeController : PlayerPowersControllerAbstract
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Player.instance.UpgradeGun();
+        Player.Instance.UpgradeGun();
     }
 }

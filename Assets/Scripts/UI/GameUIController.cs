@@ -1,76 +1,72 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-public class GameUIController : MonoBehaviour
+public class GameUIController : SimpleSingleton<GameUIController>
 {
+    [SerializeField] private TMP_Text scoreText, lostTxt;
+    [SerializeField] private TMP_Text coinsText;
+    [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TMP_Text waveText, victoryTxt;
+    [SerializeField] private TMP_Text introText;
+    [SerializeField] private TMP_Text gunRankText;
+    [SerializeField] private Button skill1Btn;
+    [SerializeField] private Button continueBtn, continue2Btn;
+    [SerializeField] private Image semiTransperantImage;
 
-    public static GameUIController instance;
-
-    [SerializeField] TMP_Text scoreText, lostTxt;
-    [SerializeField] TMP_Text coinsText;
-    [SerializeField] TMP_Text levelText;
-    [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text waveText, victoryTxt;
-    [SerializeField] TMP_Text introText;
-    [SerializeField] TMP_Text gunRankText;
-    [SerializeField] Button skill1Btn;
-    [SerializeField] Button continueBtn, continue2Btn;
-    [SerializeField] Image semiTransperantImage;
-
-    [SerializeField] GameObject pausePanel;
-    [SerializeField] GameObject defeatPanel;
-    [SerializeField] Slider healthSlider;
-    [SerializeField] Slider enemyHealthSlider;
-    [SerializeField] Image redImage;
-    [SerializeField] Animator anim;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject defeatPanel;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider enemyHealthSlider;
+    [SerializeField] private Image redImage;
+    [SerializeField] private Animator anim;
 
     [Header("Sound")]
-    [SerializeField] AudioClip click1;
-    [SerializeField] AudioClip click2;
+    [SerializeField] private AudioClip click1;
+
+    [SerializeField] private AudioClip click2;
 
     public Animator anim1;
     public AnimationClip clip;
 
     #region Unity Functions
-    private void Awake()
+
+   override protected void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        //register event at GPC ao game state changes
+        base.Awake();        //register event at GPC ao game state changes
         GamePlayController.OnGameStateChange += OnGameStateChangeMenuActivation;
 
         continueBtn.onClick.AddListener(ReturnToGameAfterRevive);
     }
-
 
     private void Start()
     {
         coinsText.text = GameDataManager.Instance.coins.ToString();
         UpdatePlayerHealthUI();
     }
-    void Update()
+
+    private void Update()
     {
         levelText.text = GameDataManager.Instance.CurrentLevel.ToString();
     }
-    #endregion
+
+    #endregion Unity Functions
+
     private void OnDestroy()
     {
         GamePlayController.OnGameStateChange -= OnGameStateChangeMenuActivation;
         continueBtn.onClick.RemoveListener(ReturnToGameAfterRevive);
     }
+
     private void OnApplicationPause(bool pause)
     {
-        // Debug.Log("pause");        
+        // Debug.Log("pause");
     }
-    void OnGameStateChangeMenuActivation(GameState state)
-    {
 
+    private void OnGameStateChangeMenuActivation(GameState state)
+    {
         defeatPanel.SetActive(state == GameState.DEFEAT);
         semiTransperantImage.gameObject.SetActive(state == GameState.DEFEAT);
         victoryTxt.gameObject.SetActive(state == GameState.LEVELCOMPLETE);
@@ -80,6 +76,7 @@ public class GameUIController : MonoBehaviour
                 GameManager.Instance.loadingFrom = LoadingFrom.LVLCOMP;
                 LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
                 break;
+
             case GameState.DEFEAT:
                 if (GameDataManager.Instance.gems < 10)
                 {
@@ -90,7 +87,6 @@ public class GameUIController : MonoBehaviour
         }
     }
 
-
     public IEnumerator UpdateScore(int CurrentScore, int newScore)
     {
         while (CurrentScore < newScore)
@@ -100,6 +96,7 @@ public class GameUIController : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+
     public IEnumerator UpdateCoinsRoutine(int coins, int coinsToAdd)
     {
         while (coins < coinsToAdd)
@@ -110,17 +107,19 @@ public class GameUIController : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
+
     public void UpdatePlayerHealthUI()
     {
-        int health = Player.instance.Health;
+        int health = Player.Instance.Health;
         healthText.text = "" + health;
         healthSlider.value = health;
-
     }
+
     public void UpdateCoins(int coins, int coinsToAdd)
     {
         StartCoroutine(UpdateCoinsRoutine(coins, coinsToAdd));
     }
+
     public void SpendGemsToRevive()
     {
         if (GameDataManager.Instance.gems >= 10)
@@ -129,28 +128,34 @@ public class GameUIController : MonoBehaviour
             ReturnToGameAfterRevive();
         }
     }
+
     public void ExitToDefeatPanel()
     {
         StartCoroutine(AfterDefeatRoutine());
     }
+
     public void ContinueGameAfterRevive()
     {
         GamePlayController.Instance.UpdateState(GameState.PLAY);
     }
+
     public void ResumeGame()
     {
         pausePanel.GetComponent<CoolDownCounter>().StartCountDown();
     }
+
     public void BackToMap()
     {
         Time.timeScale = 1;
         GamePlayController.Instance.UpdateState(GameState.EXIT);
         LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
     }
+
     public void UpdateScore(int score)
     {
         scoreText.text = "" + score;
     }
+
     public void ShowWaveInfoText(int waveIndex, int wavesTotal, string name = "")
     {
         string text = "";
@@ -173,38 +178,42 @@ public class GameUIController : MonoBehaviour
         waveText.text = text;
         Invoke("WaveTextDisable", 4);
     }
-    void WaveTextDisable()
+
+    private void WaveTextDisable()
     {
         waveText.gameObject.SetActive(false);
         introText.gameObject.SetActive(false);
-
     }
+
     public void UpdateRankStatus()
     {
-        if (Player.instance.GunUpgrades < 9)
+        if (Player.Instance.GunUpgrades < 9)
         {
-            gunRankText.text = Player.instance.GunUpgrades.ToString();
+            gunRankText.text = Player.Instance.GunUpgrades.ToString();
         }
         else
         {
             gunRankText.text = "MAX";
         }
     }
+
     public void OpenPausePanel()
     {
         GamePlayController.Instance.UpdateState(GameState.PAUSE);
         pausePanel.SetActive(true);
-
     }
+
     public void SetPlayerStatus()
     {
-        healthSlider.maxValue = Player.instance.Health;
-        healthSlider.value = Player.instance.Health;
+        healthSlider.maxValue = Player.Instance.Health;
+        healthSlider.value = Player.Instance.Health;
     }
-    void ReturnToGameAfterRevive()
+
+    private void ReturnToGameAfterRevive()
     {
         StartCoroutine(ContinueGameRoutine());
     }
+
     public void EnemyHealthSliderConfigure(int health)
     {
         enemyHealthSlider.gameObject.SetActive(true);
@@ -212,19 +221,22 @@ public class GameUIController : MonoBehaviour
         enemyHealthSlider.minValue = 0;
         enemyHealthSlider.value = health;
     }
+
     public void EnemyHealthSliderUpdate(int value)
     {
         enemyHealthSlider.value = value;
     }
-    IEnumerator ContinueGameRoutine()
+
+    private IEnumerator ContinueGameRoutine()
     {
         Time.timeScale = 1;
         defeatPanel.SetActive(false);
         semiTransperantImage.gameObject.SetActive(false);
-        Player.instance.gameObject.SetActive(true);
+        Player.Instance.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         GamePlayController.Instance.UpdateState(GameState.PLAY);
     }
+
     public IEnumerator AfterDefeatRoutine()
     {
         Time.timeScale = 1;
@@ -236,7 +248,4 @@ public class GameUIController : MonoBehaviour
 
         yield return null;
     }
-
-
 }
-

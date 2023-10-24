@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         SetLevelOfDifficulty();
-        GameUIController.instance.EnemyHealthSliderConfigure(health);
+        GameUIController.Instance.EnemyHealthSliderConfigure(health);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +29,7 @@ public class Boss : MonoBehaviour
     {
         health -= impactProcess.GetDamage();
         if (health < 0) health = 0;
-        GameUIController.instance.EnemyHealthSliderUpdate(health);
+        GameUIController.Instance.EnemyHealthSliderUpdate(health);
         impactProcess.ImapctProcess(gameObject.transform);
 
         if (health <= 0 && !isNotAlive)

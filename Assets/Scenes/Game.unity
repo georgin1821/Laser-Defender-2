@@ -2301,16 +2301,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416643776}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalScale: {x: 0.0052083335, y: 0.0052083335, z: 0.0052083335}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8259102983469113063}
+  m_Father: {fileID: 2039972066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -10.96}
+  m_AnchoredPosition: {x: 0, y: -0.05708313}
   m_SizeDelta: {x: 1024, y: 1990.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &416643778
@@ -7648,11 +7648,11 @@ GameObject:
   - component: {fileID: 1328183881}
   - component: {fileID: 1328183884}
   - component: {fileID: 1328183892}
-  - component: {fileID: 1328183883}
   - component: {fileID: 1328183885}
   - component: {fileID: 1328183888}
   - component: {fileID: 1328183891}
   - component: {fileID: 1328183893}
+  - component: {fileID: 1328183894}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -7675,18 +7675,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328183883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328183880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b516625e93b7254b8c359614717256c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1328183884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7700,8 +7688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipsPrefabs:
-  - {fileID: 4798691700310100087, guid: 3952944a042a10a4e9a36741c03cf59c, type: 3}
-  - {fileID: 4798691700310100087, guid: 3952944a042a10a4e9a36741c03cf59c, type: 3}
+  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
+  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
   scrollingBgsPrefabs:
   - {fileID: 6964077115915404065, guid: 756dcc3f48ef38840a01ee24c65c2c3b, type: 3}
   - {fileID: 246783898490487758, guid: 679973b9093a70a4e889079ab7491f28, type: 3}
@@ -7711,6 +7699,7 @@ MonoBehaviour:
   Score: 0
   levelCoins: 0
   Difficulty: 0
+  playerPrefab: {fileID: 0}
 --- !u!114 &1328183885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7791,6 +7780,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 5123463400302309476, guid: 5a63f81abf3c81045989c99dee892a94, type: 3}
+--- !u!114 &1328183894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328183880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b516625e93b7254b8c359614717256c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1341084766
 GameObject:
   m_ObjectHideFlags: 0
@@ -15300,6 +15301,7 @@ Transform:
   - {fileID: 1902254057}
   - {fileID: 1874176405}
   - {fileID: 968776411}
+  - {fileID: 416643777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051335908
@@ -15998,6 +16000,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Directional Light
       objectReference: {fileID: 0}
+    - target: {fileID: 3500206627221714462, guid: dddf0433e7d2f584d8df899a85f097ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16349,7 +16355,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 416643777}
   - {fileID: 1179938447}
   - {fileID: 807848370}
   - {fileID: 1268602814}
@@ -16926,7 +16931,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3776361749122958984, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: isSpeedLevel
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: m_RootOrder

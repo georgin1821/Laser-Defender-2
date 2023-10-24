@@ -272,11 +272,11 @@ public class EnemyPathfinding : MonoBehaviour
     {
         float distance;
 
-        distance = Vector3.Distance(Player.instance.gameObject.transform.position, transform.position);
+        distance = Vector3.Distance(Player.Instance.gameObject.transform.position, transform.position);
         speedRF = aiSpeed * speedRF;
         aiSpeed = aiSpeed * (1 + UnityEngine.Random.Range(-speedRF / 2f, speedRF / 2f));
 
-        yield return MoveToWaypoint(Player.instance.gameObject.transform.position, false, true, aiSpeed, disToPlayer);
+        yield return MoveToWaypoint(Player.Instance.gameObject.transform.position, false, true, aiSpeed, disToPlayer);
 
 
         yield return new WaitForSeconds(1f);
@@ -315,8 +315,8 @@ public class EnemyPathfinding : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Vector3 velicity = Vector3.zero;
         float distance;
-        distance = Vector3.Distance(Player.instance.gameObject.transform.position, transform.position);
-        GameObject player = Player.instance.gameObject;
+        distance = Vector3.Distance(Player.Instance.gameObject.transform.position, transform.position);
+        GameObject player = Player.Instance.gameObject;
         while (distance > .2f)
         {
             dir = (player.transform.position - transform.position).normalized;

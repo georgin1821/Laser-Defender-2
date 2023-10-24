@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveSpawner : MonoBehaviour
+public class WaveSpawner : SimpleSingleton<WaveSpawner> 
 {
-    public static WaveSpawner instance;
 
     public static event System.Action<int> OnEnemiesDieCount;
 
@@ -13,14 +12,8 @@ public class WaveSpawner : MonoBehaviour
     List<GameObject> divisionInScene;
     List<GameObject> divisions;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
 
-    }
+
 
     public void SpawnTheLevel()
     {
@@ -34,9 +27,9 @@ public class WaveSpawner : MonoBehaviour
             //instantiate all the waves in the current level (waves)
             if (waves[waveIndex].isBoss)
             {
-                GameUIController.instance.ShowWaveInfoText(waveIndex, waves.Count, "ARACHRON");
+                GameUIController.Instance.ShowWaveInfoText(waveIndex, waves.Count, "ARACHRON");
             }
-            else GameUIController.instance.ShowWaveInfoText(waveIndex, waves.Count);
+            else GameUIController.Instance.ShowWaveInfoText(waveIndex, waves.Count);
             divisions = waves[waveIndex].GetDivisions();
             float delay = waves[waveIndex].GetDelay();
 

@@ -7,6 +7,6 @@ public class PlayerShieldPowerController : PlayerPowersControllerAbstract
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Player.instance.ShieldsUp();
+        Player.Instance.ShieldsUp();
     }
 }

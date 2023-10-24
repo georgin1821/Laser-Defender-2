@@ -55,8 +55,8 @@ public abstract class PlayerWeaponBulletsAbstract : IPlayerWeapon
     }
     private void Start()
     {
-        firePoint = Player.instance.firePos;
-        isAlwaysShooting = Player.instance.isAlwaysShooting;
+        firePoint = Player.Instance.firePos;
+        isAlwaysShooting = Player.Instance.isAlwaysShooting;
         if (isBurstShooting)
         {
             StartCoroutine(BurstShooting());

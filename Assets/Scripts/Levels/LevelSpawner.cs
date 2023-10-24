@@ -26,8 +26,8 @@ public class LevelSpawner : MonoBehaviour
     {
         if (index < levels.Count)
         {
-            WaveSpawner.instance.SetWaves(levels[index].Waves);
-            WaveSpawner.instance.SpawnTheLevel();
+            WaveSpawner.Instance.SetWaves(levels[index].Waves);
+            WaveSpawner.Instance.SpawnTheLevel();
         }
     }
 }

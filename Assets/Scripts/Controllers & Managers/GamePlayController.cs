@@ -28,13 +28,15 @@ public sealed class GamePlayController : Singleton<GamePlayController>
     private AudioType victoryClip;
     private GameObject[] sbgGameObjects;
     private AudioType soundtrack;
-    private GameObject playerPrefab;
+    public GameObject playerPrefab;
     private Vector3 shipStartingPos = new Vector3(0, -6, 0);
     private int levelScore;
 
     //int batterySpend;
     public int ShipPower { get; private set; }
 
+
+  bool andOfPlayerIntroAnim;
      protected override void Awake()
     {
         base.Awake();
@@ -83,7 +85,7 @@ public sealed class GamePlayController : Singleton<GamePlayController>
 
                 //Clears remaining enemies and sbgs
                 DestroyLevel();
-                WaveSpawner.instance.DestroyWaves();
+                WaveSpawner.Instance.DestroyWaves();
 
                 //Instantiation
                 InstantiateScrollingBackgrounds();
@@ -93,7 +95,7 @@ public sealed class GamePlayController : Singleton<GamePlayController>
 
                 // batterySpend = 0;
                 Score = 0;
-                GameUIController.instance.UpdateScore(Score);
+                GameUIController.Instance.UpdateScore(Score);
 
                 EnemyCount.instance.Count = 0;
                 levelScore = 0;
@@ -114,7 +116,7 @@ public sealed class GamePlayController : Singleton<GamePlayController>
                 break;
 
             case GameState.LEVELCOMPLETE:
-                Player.instance.StopShootingClip();
+                Player.Instance.StopShootingClip();
 
                 int unlockedLevel = GameDataManager.Instance.CurrentLevel;
                 if (GameDataManager.Instance.levels[unlockedLevel + 1] == false)
@@ -139,10 +141,20 @@ public sealed class GamePlayController : Singleton<GamePlayController>
                 StartCoroutine(DelayRoutine());
                 break;
 
+            case GameState.PLAYERDEATH:
+               // Time.timeScale = 0;
+               // Player.instance.StopShootingClip();
+               // WaveSpawner.instance.StopAllCoroutines();
+               if(aliveShips > 0)
+                {
+                    Destroy(Player.Instance.gameObject);
+                playerPrefab = shipsPrefabs[1];
+                    Instantiate(playerPrefab, shipStartingPos, Quaternion.identity);
+                   // StartCoroutine(PlayerStartingAnim());
+
+                }
+                break;
             case GameState.DEFEAT:
-                Time.timeScale = 0;
-                Player.instance.StopShootingClip();
-                WaveSpawner.instance.StopAllCoroutines();
                 break;
 
             case GameState.LEVELCOMPLETE_UI:
@@ -155,7 +167,7 @@ public sealed class GamePlayController : Singleton<GamePlayController>
 
             case GameState.PAUSE:
                 Time.timeScale = 0;
-                Player.instance.StopShootingClip();
+                Player.Instance.StopShootingClip();
                 break;
 
             case GameState.EXIT:
@@ -165,13 +177,21 @@ public sealed class GamePlayController : Singleton<GamePlayController>
 
         OnGameStateChange?.Invoke(state);
     }
-
+    private void Update()
+    {
+        switch (state)
+        {
+            case GameState.INIT:
+                if(andOfPlayerIntroAnim) UpdateState(GameState.LOADLEVEL);
+                break;
+        }
+    }
     public void AddToScore(int scoreValue)
     {
         int startScore = Score;
         Score += scoreValue;
         levelScore += scoreValue;
-        StartCoroutine(GameUIController.instance.UpdateScore(startScore, Score));
+        StartCoroutine(GameUIController.Instance.UpdateScore(startScore, Score));
     }
 
     private void SelectShipPrefabSetShipPower()
@@ -256,6 +276,7 @@ public sealed class GamePlayController : Singleton<GamePlayController>
         {
             t1 = 0;
             t2 = 1;
+
         }
         else
         {
@@ -263,11 +284,14 @@ public sealed class GamePlayController : Singleton<GamePlayController>
         }
 
         yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(t1));
-        Player.instance.gameObject.SetActive(true);
-        Player.instance.PlayerAnimation();
+        Player.Instance.gameObject.SetActive(true);
+        Player.Instance.PlayerAnimation();
 
-        yield return new WaitForSecondsRealtime(t2);
-        UpdateState(GameState.LOADLEVEL);
+        AnimationClip clip = Player.Instance.GetComponent<Animator>().runtimeAnimatorController.animationClips[0];
+        float animtime = clip.length;
+
+        yield return new WaitForSecondsRealtime(animtime);
+        andOfPlayerIntroAnim = true;
     }
 
     private IEnumerator DelayRoutine()
@@ -301,6 +325,7 @@ public enum GameState
     LEVELCOMPLETE,
     RETRY,
     PAUSE,
+    PLAYERDEATH,
     DEFEAT,
     LEVELCOMPLETE_UI,
     EXIT

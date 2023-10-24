@@ -34,7 +34,7 @@ public class EnemyProjectileImpactController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Player.instance.DamagePlayer(damage);
+            Player.Instance.DamagePlayer(damage);
             VFXController.instance.EnemyLaserImpact(transform);
 
             if (audioType != AudioType.None)

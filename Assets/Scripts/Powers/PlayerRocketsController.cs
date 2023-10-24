@@ -8,7 +8,7 @@ public class PlayerRocketsController : PlayerPowersControllerAbstract
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Player.instance.FireRockets();
+        Player.Instance.FireRockets();
 
     }
 }
