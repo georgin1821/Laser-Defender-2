@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SimpleSingleton<PlayerController> 
 {
 
     private float xMin, xMax, yMin, yMax;
@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
 
     public bool mobileRelease;
     public Vector2 dir;
-    private void Awake()
+    override protected void Awake()
     {
+        base.Awake();
         viewCamera = Camera.main;
 
         speed = speed / 1000;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (!GamePlayController.Instance.andOfAnimation) return;
         if (GamePlayController.Instance.state == GameState.PLAY)
         {
             Move();

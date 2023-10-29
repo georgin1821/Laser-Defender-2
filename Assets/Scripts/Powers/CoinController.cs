@@ -46,7 +46,7 @@ public class CoinController : MonoBehaviour
             int currentCoins = GameDataManager.Instance.coins;
             GameDataManager.Instance.coins += 100;
             GamePlayController.Instance.levelCoins += 100;
-            GameUIController.Instance.UpdateCoins(currentCoins, GameDataManager.Instance.coins);
+            StartCoroutine(GameUIController.Instance.UpdateScoreRoutine(currentCoins, GameDataManager.Instance.coins));
         }
     }
 

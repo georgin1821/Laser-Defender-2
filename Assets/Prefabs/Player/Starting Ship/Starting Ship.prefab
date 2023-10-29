@@ -5168,9 +5168,8 @@ MonoBehaviour:
   engineVFX: {fileID: 8406044671327542910}
   shootingFlames: {fileID: 1059050182630161250}
   rocketPrefab: {fileID: 165506286884226736, guid: bc7b3756f256764498dcb582d293fd7b, type: 3}
-  shieldsVFX: {fileID: 6405638360923450342}
   isAlwaysShooting: 0
-  collideWithEnemy: 0
+  collideWithEnemy: 1
   isAbleToFire: 1
   firePos: {fileID: 1416074892558850024}
   targets: []

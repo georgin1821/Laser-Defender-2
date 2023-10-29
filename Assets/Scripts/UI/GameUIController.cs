@@ -8,7 +8,6 @@ public class GameUIController : SimpleSingleton<GameUIController>
     [SerializeField] private TMP_Text scoreText, lostTxt;
     [SerializeField] private TMP_Text coinsText;
     [SerializeField] private TMP_Text levelText;
-    [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text waveText, victoryTxt;
     [SerializeField] private TMP_Text introText;
     [SerializeField] private TMP_Text gunRankText;
@@ -20,7 +19,6 @@ public class GameUIController : SimpleSingleton<GameUIController>
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider enemyHealthSlider;
-    [SerializeField] private Image redImage;
     [SerializeField] private Animator anim;
 
     [Header("Sound")]
@@ -38,19 +36,15 @@ public class GameUIController : SimpleSingleton<GameUIController>
         base.Awake();        //register event at GPC ao game state changes
         GamePlayController.OnGameStateChange += OnGameStateChangeMenuActivation;
 
-        continueBtn.onClick.AddListener(ReturnToGameAfterRevive);
+        continueBtn.onClick.AddListener(ContinueGameRoutine);
     }
 
     private void Start()
     {
         coinsText.text = GameDataManager.Instance.coins.ToString();
-        UpdatePlayerHealthUI();
-    }
-
-    private void Update()
-    {
         levelText.text = GameDataManager.Instance.CurrentLevel.ToString();
     }
+
 
     #endregion Unity Functions
 
@@ -58,12 +52,12 @@ public class GameUIController : SimpleSingleton<GameUIController>
     {
         base.OnDestroy();
         GamePlayController.OnGameStateChange -= OnGameStateChangeMenuActivation;
-        continueBtn.onClick.RemoveListener(ReturnToGameAfterRevive);
+        continueBtn.onClick.RemoveListener(ContinueGameRoutine);
     }
 
     private void OnApplicationPause(bool pause)
     {
-        // Debug.Log("pause");
+       // Debug.Log("pause");
     }
 
     private void OnGameStateChangeMenuActivation(GameState state)
@@ -73,11 +67,6 @@ public class GameUIController : SimpleSingleton<GameUIController>
         victoryTxt.gameObject.SetActive(state == GameState.LEVELCOMPLETE);
         switch (state)
         {
-            case GameState.LEVELCOMPLETE_UI:
-                GameManager.Instance.loadingFrom = LoadingFrom.LVLCOMP;
-                LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
-                break;
-
             case GameState.DEFEAT:
                 if (GameDataManager.Instance.gems < 10)
                 {
@@ -88,58 +77,19 @@ public class GameUIController : SimpleSingleton<GameUIController>
         }
     }
 
-    public IEnumerator UpdateScore(int CurrentScore, int newScore)
-    {
-        while (CurrentScore < newScore)
-        {
-            CurrentScore = (int)Mathf.MoveTowards(CurrentScore, newScore, 1f);
-            scoreText.text = CurrentScore.ToString();
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
-
-    public IEnumerator UpdateCoinsRoutine(int coins, int coinsToAdd)
-    {
-        while (coins < coinsToAdd)
-        {
-            coins = (int)Mathf.MoveTowards(coins, coinsToAdd, 4f);
-
-            coinsText.text = coins.ToString();
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
-
-    public void UpdatePlayerHealthUI()
-    {
-        //int health = Player.Instance.Health;
-       // healthText.text = "" + health;
-       // healthSlider.value = health;
-    }
-
-    public void UpdateCoins(int coins, int coinsToAdd)
-    {
-        StartCoroutine(UpdateCoinsRoutine(coins, coinsToAdd));
-    }
 
     public void SpendGemsToRevive()
     {
         if (GameDataManager.Instance.gems >= 10)
         {
             GameDataManager.Instance.gems -= 10;
-            ReturnToGameAfterRevive();
+            ContinueGameRoutine();
         }
     }
-
     public void ExitToDefeatPanel()
     {
         StartCoroutine(AfterDefeatRoutine());
     }
-
-    public void ContinueGameAfterRevive()
-    {
-        GamePlayController.Instance.UpdateState(GameState.PLAY);
-    }
-
     public void ResumeGame()
     {
         pausePanel.GetComponent<CoolDownCounter>().StartCountDown();
@@ -204,16 +154,6 @@ public class GameUIController : SimpleSingleton<GameUIController>
         pausePanel.SetActive(true);
     }
 
-    public void SetPlayerStatus()
-    {
-        //healthSlider.maxValue = Player.Instance.Health;
-       // healthSlider.value = Player.Instance.Health;
-    }
-
-    private void ReturnToGameAfterRevive()
-    {
-        StartCoroutine(ContinueGameRoutine());
-    }
 
     public void EnemyHealthSliderConfigure(int health)
     {
@@ -228,23 +168,41 @@ public class GameUIController : SimpleSingleton<GameUIController>
         enemyHealthSlider.value = value;
     }
 
-    private IEnumerator ContinueGameRoutine()
+    private void ContinueGameRoutine()
     {
-        Time.timeScale = 1;
         defeatPanel.SetActive(false);
         semiTransperantImage.gameObject.SetActive(false);
-        Player.Instance.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        GamePlayController.Instance.BeginIntroSequence(true);
+
         GamePlayController.Instance.UpdateState(GameState.PLAY);
+        Player.Instance.ShieldsUp();
     }
 
+    public IEnumerator UpdateScoreRoutine(int CurrentScore, int newScore)
+    {
+        while (CurrentScore < newScore)
+        {
+            CurrentScore = (int)Mathf.MoveTowards(CurrentScore, newScore, 1f);
+            scoreText.text = CurrentScore.ToString();
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+    public IEnumerator UpdateCoinsRoutine(int coins, int coinsToAdd)
+    {
+        while (coins < coinsToAdd)
+        {
+            coins = (int)Mathf.MoveTowards(coins, coinsToAdd, 4f);
+            coinsText.text = coins.ToString();
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
     public IEnumerator AfterDefeatRoutine()
     {
         Time.timeScale = 1;
         defeatPanel.SetActive(false);
         semiTransperantImage.gameObject.SetActive(false);
         lostTxt.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(3f);
         GameManager.Instance.LoadSceneWithNameFrom("LevelSelect", LoadingFrom.DEFEAT);
 
         yield return null;

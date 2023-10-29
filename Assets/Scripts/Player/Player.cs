@@ -88,16 +88,13 @@ public class Player : SimpleSingleton<Player>, IDamageable
     {
         audioSource.Stop();
     }
-
     private void PlayerDeath()
     {
         GamePlayController.Instance.UpdateState(GameState.PLAYERDEATH);
         AudioController.Instance.PlayAudio(AudioType.PlayerDeath);
-        Destroy(gameObject);
     }
     void GameStateChangeHandle(GameState state)
     {
-        anim.enabled = (state != GameState.PLAY);
 
         if (state == GameState.PLAY)
         {
@@ -126,7 +123,6 @@ public class Player : SimpleSingleton<Player>, IDamageable
             }
         }
     }
-
     public void ShieldsUp()
     {
         if (GamePlayController.Instance.state == GameState.PLAY)
@@ -138,7 +134,6 @@ public class Player : SimpleSingleton<Player>, IDamageable
             co = StartCoroutine(ShieldsCountDown());
         }
     }
-
     public void UpgradeGun()
     {
         if (GamePlayController.Instance.state == GameState.PLAY)
@@ -153,7 +148,6 @@ public class Player : SimpleSingleton<Player>, IDamageable
         }
     }
 
-
     public void DamagePlayer()
     {
         if (!collideWithEnemy || playerHasShield) return;
@@ -162,16 +156,10 @@ public class Player : SimpleSingleton<Player>, IDamageable
     }
     public void PlayerAnimation()
     {
-        //Speed Level debug
-        if (GameManager.Instance.isSpeedLevel)
-        {
-            return;
-        }
-        else
-        {
+            transform.position = new Vector3(0, -6, 0);
             anim.Play("Intro");
-        }
     }
+
     IEnumerator ShieldsCountDown()
     {
         playerHasShield = true;
