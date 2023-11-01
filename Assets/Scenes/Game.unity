@@ -179,9 +179,8 @@ GameObject:
   - component: {fileID: 74752866}
   - component: {fileID: 74752865}
   - component: {fileID: 74752864}
-  - component: {fileID: 74752868}
   m_Layer: 5
-  m_Name: Retry (1)
+  m_Name: AdsButn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +211,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.4433962, g: 0.42875576, b: 0.42875576, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -230,7 +229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 74752865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 512998088}
+        m_TargetAssemblyTypeName: AdsMobManager, Assembly-CSharp
+        m_MethodName: ShowRewardedAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &74752865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,21 +300,6 @@ RectTransform:
   m_AnchoredPosition: {x: 5.299, y: -491.58}
   m_SizeDelta: {x: 95, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &74752868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74752862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186f045fb6c776d418fcbbbb1c677dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 74752864}
-  _androidAdUnitId: Rewarded_Android
-  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &87089341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,6 +2812,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 220726365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &512998082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9025272162233380950, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
+  m_PrefabInstance: {fileID: 9025272161855601355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &512998088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512998082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bce37435e78b34cbf6dba98f128db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appID: ca-app-pub-2066779871986916~3498101778
 --- !u!1 &513641404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,37 +3147,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 623776585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &617999279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 617999281}
-  m_Layer: 0
-  m_Name: Ads
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &617999281
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617999279}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &623776585
 Transform:
@@ -3875,7 +3858,6 @@ GameObject:
   - component: {fileID: 769146766}
   - component: {fileID: 769146768}
   - component: {fileID: 769146767}
-  - component: {fileID: 769146770}
   - component: {fileID: 769146774}
   - component: {fileID: 769146775}
   m_Layer: 5
@@ -3950,22 +3932,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769146765}
   m_CullTransparentMesh: 1
---- !u!114 &769146770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769146765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc51146a9540f8248b937cc8ba1dceef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _androidGameId: 4932732
-  _iOSGameId: 4932733
-  _testMode: 0
-  rewardedAdsButton: {fileID: 74752868}
 --- !u!114 &769146774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3973,7 +3939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769146765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5400e7a96ff3d04a993751eafc473c8, type: 3}
   m_Name: 
@@ -4033,7 +3999,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769146765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54a0e2f396779074c9dccdcd8201b317, type: 3}
   m_Name: 
@@ -8343,6 +8309,37 @@ Transform:
   - {fileID: 1211408563}
   - {fileID: 743338623}
   m_Father: {fileID: 1891697569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1679281153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679281154}
+  m_Layer: 0
+  m_Name: ------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1679281154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679281153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691022716
 GameObject:
@@ -15837,10 +15834,10 @@ MonoBehaviour:
   skill1Btn: {fileID: 2029835224}
   continueBtn: {fileID: 1268010258}
   continue2Btn: {fileID: 478178169}
+  adsBtn: {fileID: 74752864}
   semiTransperantImage: {fileID: 88025451}
   pausePanel: {fileID: 1882231927}
   defeatPanel: {fileID: 769146765}
-  healthSlider: {fileID: 0}
   enemyHealthSlider: {fileID: 1274427844}
   anim: {fileID: 477811379}
   click1: {fileID: 8300000, guid: 0affd00b1663587478ab06d564e2ba8e, type: 3}
@@ -16350,7 +16347,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3776361749122958984, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: isSpeedLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: m_RootOrder
@@ -16403,7 +16400,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9025272162233380950, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 512998088}
   m_SourcePrefab: {fileID: 100100000, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -16420,8 +16420,8 @@ SceneRoots:
   - {fileID: 2039972066}
   - {fileID: 113117917}
   - {fileID: 2002249674}
-  - {fileID: 617999281}
+  - {fileID: 4063994825728681772}
   - {fileID: 1787376320}
   - {fileID: 1328183881}
   - {fileID: 9025272161855601355}
-  - {fileID: 4063994825728681772}
+  - {fileID: 1679281154}

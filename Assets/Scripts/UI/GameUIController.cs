@@ -12,12 +12,11 @@ public class GameUIController : SimpleSingleton<GameUIController>
     [SerializeField] private TMP_Text introText;
     [SerializeField] private TMP_Text gunRankText;
     [SerializeField] private Button skill1Btn;
-    [SerializeField] private Button continueBtn, continue2Btn;
+    [SerializeField] private Button continueBtn, continue2Btn, adsBtn;
     [SerializeField] private Image semiTransperantImage;
 
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject defeatPanel;
-    [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider enemyHealthSlider;
     [SerializeField] private Animator anim;
 
@@ -72,7 +71,7 @@ public class GameUIController : SimpleSingleton<GameUIController>
                 {
                     continue2Btn.interactable = false;
                 }
-
+                adsBtn.interactable = AdsMobManager.Instance.IsRewardedAdReady;
                 break;
         }
     }
@@ -94,19 +93,16 @@ public class GameUIController : SimpleSingleton<GameUIController>
     {
         pausePanel.GetComponent<CoolDownCounter>().StartCountDown();
     }
-
     public void BackToMap()
     {
         Time.timeScale = 1;
         GamePlayController.Instance.UpdateState(GameState.EXIT);
         LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
     }
-
     public void UpdateScore(int score)
     {
         scoreText.text = "" + score;
     }
-
     public void ShowWaveInfoText(int waveIndex, int wavesTotal, string name = "")
     {
         string text = "";
@@ -129,13 +125,11 @@ public class GameUIController : SimpleSingleton<GameUIController>
         waveText.text = text;
         Invoke("WaveTextDisable", 4);
     }
-
     private void WaveTextDisable()
     {
         waveText.gameObject.SetActive(false);
         introText.gameObject.SetActive(false);
     }
-
     public void UpdateWeaponRankStatus(int ranks)
     {
         if (ranks < 9)
@@ -147,14 +141,11 @@ public class GameUIController : SimpleSingleton<GameUIController>
             gunRankText.text = "MAX";
         }
     }
-
     public void OpenPausePanel()
     {
         GamePlayController.Instance.UpdateState(GameState.PAUSE);
         pausePanel.SetActive(true);
     }
-
-
     public void EnemyHealthSliderConfigure(int health)
     {
         enemyHealthSlider.gameObject.SetActive(true);
@@ -162,12 +153,10 @@ public class GameUIController : SimpleSingleton<GameUIController>
         enemyHealthSlider.minValue = 0;
         enemyHealthSlider.value = health;
     }
-
     public void EnemyHealthSliderUpdate(int value)
     {
         enemyHealthSlider.value = value;
     }
-
     private void ContinueGameRoutine()
     {
         defeatPanel.SetActive(false);
@@ -177,7 +166,6 @@ public class GameUIController : SimpleSingleton<GameUIController>
         GamePlayController.Instance.UpdateState(GameState.PLAY);
         Player.Instance.ShieldsUp();
     }
-
     public IEnumerator UpdateScoreRoutine(int CurrentScore, int newScore)
     {
         while (CurrentScore < newScore)

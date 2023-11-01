@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5928318358908993690}
   - component: {fileID: 3109695703317974022}
   - component: {fileID: 8682122994812646466}
-  - component: {fileID: 5070141364382833584}
   - component: {fileID: 1648407251255430037}
+  - component: {fileID: 8638374738952192920}
   m_Layer: 7
   m_Name: BulletStraight
   m_TagString: Projectile
@@ -138,20 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5070141364382833584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702611311516138266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bed6727b41b4494c823f3cf42efec79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 100
-  impactVFX: {fileID: 3554396257959793348, guid: 2778723d5b4874c4da8205066a932201, type: 3}
 --- !u!114 &1648407251255430037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +147,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8702611311516138266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f71762302e606ce40b9c222f1bbb1472, type: 3}
+  m_Script: {fileID: 11500000, guid: e85b4a9d0bec16543bc787be334bd107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 6
+--- !u!114 &8638374738952192920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702611311516138266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a29750b2fd3f04595e36e18ea01dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  impactVFX: {fileID: 6617642959616773722, guid: 2cf4d65aab4c3b04ea5370f64f723fc4, type: 3}
