@@ -317,10 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a69c913a2d274b45af346824140eaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToFire: 30
+  chanceToFire: 100
   prjectilePrefab: {fileID: 165506286884226736, guid: ddc99ffdd2325334ea0001908ac31cb1, type: 3}
-  minTimeToFire: 2
-  maxTimeToFire: 5
+  delayToShoot: 1
+  repeatTime: 1
 --- !u!95 &185380939
 Animator:
   serializedVersion: 7

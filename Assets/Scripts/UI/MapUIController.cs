@@ -54,7 +54,7 @@ public class MapUIController : MonoBehaviour
 
     void InitializeLevelMenu()
     {
-        bool[] levels = GameDataManager.Instance.levels;
+        bool[] levels = GameDataManager.Instance.levels.ToArray();
 
         for (int i = 0; i < levels.Length; i++)
         {

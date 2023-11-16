@@ -7,7 +7,7 @@ public class EnemyLaser : EnemyWeaponAbstract
 
     private void Start()
     {
-        InvokeRepeating("FireChance", minTimeToFire, maxTimeToFire);
+        InvokeRepeating("FireChance", delayToShoot, repeatTime);
 
     }
    protected override void FireChance()

@@ -6,7 +6,7 @@ public abstract class EnemyWeaponAbstract : MonoBehaviour
 {
     [SerializeField] protected float chanceToFire;
     [SerializeField] protected GameObject prjectilePrefab;
-    [SerializeField] protected int minTimeToFire, maxTimeToFire;
+    [SerializeField] protected int delayToShoot, repeatTime;
 
     abstract protected void FireChance();
     abstract public void Firing();

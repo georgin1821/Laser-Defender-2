@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526253757408788664}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   - {fileID: 3461679789205017400}
   - {fileID: 5984625164732838230}
   m_Father: {fileID: 7618379419511435384}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1722245211412944729
 GameObject:
@@ -56,13 +56,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722245211412944729}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.32342544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3461679789205017400}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3452222759762857928
 GameObject:
@@ -87,6 +87,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3452222759762857928}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.20450142, y: -0.67688924, z: 0.67688936, w: -0.20450173}
   m_LocalPosition: {x: 0.11577085, y: 0.040860288, z: -0.000000005489941}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
@@ -95,7 +96,6 @@ Transform:
   - {fileID: 7879677050722511475}
   - {fileID: 8202813589955056486}
   m_Father: {fileID: 6875290213722541696}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3557152119456926151
 GameObject:
@@ -122,13 +122,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3557152119456926151}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.20450145, y: -0.67688924, z: 0.6768894, w: -0.20450173}
   m_LocalPosition: {x: -0.119028606, y: -0.00000006144624, z: -0.03007716}
   m_LocalScale: {x: 1, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3461679789205017400}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &136765811554976555
 MeshFilter:
@@ -203,6 +203,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6243133062959396597}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.20450142, y: -0.67688924, z: 0.67688936, w: 0.20450173}
   m_LocalPosition: {x: -0.11577085, y: 0.040860288, z: -0.000000005489941}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
@@ -211,7 +212,6 @@ Transform:
   - {fileID: 9596026883999766}
   - {fileID: 769272003927291347}
   m_Father: {fileID: 6875290213722541696}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7129826148347833026
 GameObject:
@@ -243,6 +243,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129826148347833026}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -250,7 +251,6 @@ Transform:
   m_Children:
   - {fileID: 6875290213722541696}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &6779659214293778397
 MeshFilter:
@@ -310,14 +310,22 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129826148347833026}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.44369203, y: 0.6636324, z: 0.06800889}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &5094825267491389949
 Animator:
-  serializedVersion: 4
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -331,10 +339,12 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4659930823735128229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0114d318a49533340bd3169c4ba21cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyState: 0
 --- !u!114 &-8667674394595477175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,10 +392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a69c913a2d274b45af346824140eaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToFire: 10
+  chanceToFire: 100
   prjectilePrefab: {fileID: 165506286884226736, guid: ddc99ffdd2325334ea0001908ac31cb1, type: 3}
-  minTimeToFire: 2
-  maxTimeToFire: 4
+  delayToShoot: 1
+  repeatTime: 1
 --- !u!1 &8586712860536768756
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,13 +421,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8586712860536768756}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.20450145, y: -0.67688924, z: 0.6768894, w: 0.20450173}
   m_LocalPosition: {x: 0.119028606, y: -0.00000006144624, z: -0.03007716}
   m_LocalScale: {x: 1, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5984625164732838230}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2497608064379696299
 MeshFilter:
@@ -491,11 +502,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9032845936573285489}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.32342544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5984625164732838230}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

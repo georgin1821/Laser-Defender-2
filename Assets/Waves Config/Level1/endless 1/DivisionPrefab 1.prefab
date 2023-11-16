@@ -53,7 +53,7 @@ MonoBehaviour:
       path: {fileID: 3305447395282386722, guid: 8dbee08d93016d14ea89f75f81e91bc6, type: 3}
       formation: {fileID: 0}
       enemyPrefabs:
-      - {fileID: 2823241783973076548, guid: 447e511ddf34f82408480ded04522946, type: 3}
+      - {fileID: 7129826148347833026, guid: 943891c3e7e6ef2478c9bffee73af982, type: 3}
       isFormMoving: 0
       isRotating: 1
       endlessMove: 1

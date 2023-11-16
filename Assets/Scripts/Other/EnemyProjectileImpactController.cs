@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyProjectileImpactController : MonoBehaviour
 {
 
-    [SerializeField] int damage = 100; /// <summary>
     /// ? needs that?
     /// </summary>
     [SerializeField] AudioType audioType;
@@ -30,7 +29,6 @@ public class EnemyProjectileImpactController : MonoBehaviour
     public void SetLevelOfDifficulty()
     {
         float diff = GamePlayController.Instance.Difficulty;
-        damage += (int)(diff * .5f);
     }
     private void OnTriggerEnter(Collider other)
     {

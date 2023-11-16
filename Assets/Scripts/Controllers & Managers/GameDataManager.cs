@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class GameDataManager : Singleton<GameDataManager>
@@ -12,18 +15,23 @@ public class GameDataManager : Singleton<GameDataManager>
     public int LevelIndex { get; set; }
     public DateTime currentTime { get; set; }
     public DateTime nextSessionTime;
-
     //Data
     public int selectedShip;
-    public bool[] ships;  //bool to true to unlock a ship in the array
-    public int coins;
     public int gems;
     public int batteryLife;
     public bool isGameStartedFirstTime;
-    public bool[] levels;
+    public List<bool> levels;
     public LevelCompletedDifficulty[] levelCompletedDifficulty;
-    public int[] shipsPower;
-    public int[] shipsRank;
+    public int coins;
+    private int shipsCount = 5;
+    private int levelsCount = 15;
+    private int levelsComplete = 0;
+    public int squadsUnlocked = 1;
+    public int[] squad;
+    public List<bool> unlockedShips;  //bool to true to unlock a ship in the array
+    public List<int> shipsPower;
+    public List<int> shipsRank;
+    public List<string> shipsName;
     public DateTime sessionTime;
     public int enemiesKilled;
     public float musicVolume;
@@ -74,44 +82,51 @@ public class GameDataManager : Singleton<GameDataManager>
             gems = 10;
             batteryLife = 90;
             enemiesKilled = 0;
-            levels = new bool[5];
+            levels = new List<bool>();
             levelCompletedDifficulty = new LevelCompletedDifficulty[5];
-            ships = new bool[5];
-            shipsPower = new int[6];
+            shipsCount = Enum.GetNames(typeof(ShipsNameEnum)).Length;
+            unlockedShips = new List<bool>();
+            shipsPower = new List<int>();
+            shipsRank = new List<int>();
             dailyRewards = new bool[4];
             currentDifficulty = GameDifficulty.EASY;
             musicVolume = 0.7f;
             soundVolume = 0.5f;
-
-            for (int i = 0; i < shipsPower.Length; i++)
-            {
-                shipsPower[0] = 100;
-                shipsPower[1] = 200;
-            }
-
             isGameStartedFirstTime = false;
 
-            levels[0] = true;
-            for (int i = 1; i < levels.Length; i++)
+            UnlockSquads();
+            SetShipNames();
+            squad = new int[3] { 0, 1, 2 }; // squad
+            foreach (var item in shipsName)
             {
-                levels[i] = false;
+                // Debug.Log(item);
+            }
+            shipsPower.Insert(shipsName.IndexOf("startingShip"), 100);
+            shipsPower.Insert(shipsName.IndexOf("ship2"), 100);
+            shipsPower.Insert(shipsName.IndexOf("ship3"), 100);
+            shipsPower.Insert(shipsName.IndexOf("ship4"), 100);
+
+            for (int i = 0; i < shipsCount - 1; i++)
+            {
+                shipsRank.Add(0);
+            }
+
+            unlockedShips.Add(true);
+            for (int i = 1; i < shipsCount - 1; i++)
+            {
+                unlockedShips.Add(false);
+            }
+
+            levels.Add(true);
+            for (int i = 1; i < levelsCount - 1; i++)
+            {
+                levels.Add(false);
             }
             levels[1] = true; //test
 
 
             //unlocking first ship locks the others
-            ships[0] = true;
-            for (int i = 1; i < ships.Length; i++)
-            {
-                ships[i] = false;
-            }
-
-            shipsRank = new int[5];
-            for (int i = 0; i < shipsRank.Length; i++)
-            {
-                shipsRank[i] = 0;
-            }
-            for(int i = 0; i < dailyRewards.Length; i++)
+            for (int i = 0; i < dailyRewards.Length; i++)
             {
                 dailyRewards[i] = false;
             }
@@ -121,22 +136,25 @@ public class GameDataManager : Singleton<GameDataManager>
             }
 
             //test
-           // levelCompletedDifficulty[0] = LevelCompletedDifficulty.MEDIUM;
-          //  levelCompletedDifficulty[1] = LevelCompletedDifficulty.EASY;
+            // levelCompletedDifficulty[0] = LevelCompletedDifficulty.MEDIUM;
+            //  levelCompletedDifficulty[1] = LevelCompletedDifficulty.EASY;
 
 
-            ships[0] = true;
-            ships[1] = true;
+            unlockedShips[0] = true;
+            unlockedShips[1] = true;
 
             data = new GameData();
 
             data.Coins = coins;
             data.IsGameStartedFirstTime = isGameStartedFirstTime;
             data.Levels = levels;
-            data.Ships = ships;
+            data.Squad = squad;
+            data.UnlockedShips = unlockedShips;
             data.ShipsPower = shipsPower;
             data.SelectedShip = selectedShip;
+            data.ShipsName = shipsName;
             data.ShipsRank = shipsRank;
+            data.SquadsUnlocked = squadsUnlocked;
             data.CurrentDifficulty = currentDifficulty;
             data.SessionTime = sessionTime;
             data.EnemiesKilled = enemiesKilled;
@@ -162,8 +180,12 @@ public class GameDataManager : Singleton<GameDataManager>
                 data.Gems = gems;
                 data.IsGameStartedFirstTime = isGameStartedFirstTime;
                 data.Levels = levels;
-                data.Ships = ships;
+                data.Squad = squad;
+                data.UnlockedShips = unlockedShips;
                 data.ShipsRank = shipsRank;
+                data.ShipsName = shipsName;
+                data.SquadsUnlocked = squadsUnlocked;
+
                 data.SelectedShip = selectedShip;
                 data.CurrentDifficulty = currentDifficulty;
                 data.BatteryLife = batteryLife;
@@ -214,6 +236,18 @@ public class GameDataManager : Singleton<GameDataManager>
             }
         }
     }
+
+    private void SetShipNames()
+    {
+        shipsName = ((ShipsNameEnum[])Enum.GetValues(typeof(ShipsNameEnum))).Select(c => c.ToString()).ToList();
+    }
+    private void UnlockSquads()
+    {
+        if (levelsComplete < 5)
+        {
+            squadsUnlocked = 1;
+        }
+    }
 }
 
 public enum GameDifficulty
@@ -230,17 +264,28 @@ public enum LevelCompletedDifficulty
     MEDIUM = 2,
     HARD = 3
 }
+public enum ShipsNameEnum
+{
+    startingShip,
+    ship2,
+    ship3,
+    ship4,
+    ship5
+}
 [Serializable]
 class GameData
 {
     public int SelectedShip { get; set; }
+    public int[] Squad { get; set; }
     public int Coins { get; set; }
-    public bool[] Ships { get; set; }
+    public List<bool> UnlockedShips { get; set; }
+    public List<int> ShipsPower { get; set; }
+    public List<string> ShipsName { get; set; }
+    public List<int> ShipsRank { get; set; }
     public int Gems { get; set; }
+    public int SquadsUnlocked { get; set; }
     public bool IsGameStartedFirstTime { get; set; }
-    public bool[] Levels { get; set; }
-    public int[] ShipsPower { get; set; }
-    public int[] ShipsRank { get; set; }
+    public List<bool> Levels { get; set; }
     public int BatteryLife { get; set; }
     public DateTime SessionTime { get; set; }
     public GameDifficulty CurrentDifficulty { get; set; }
