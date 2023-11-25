@@ -91,7 +91,7 @@ public class MainSceneMenuController : MonoBehaviour
 
     public void LoadLevelScene()
     {
-        AudioController.Instance.PlayAudio(AudioType.UI_click_magic_2);
+        AudioController.Instance.PlayAudio(AudioType.UI_click_magic_3);
         GameManager.Instance.loadingFrom = LoadingFrom.MAIN;
         LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
     }

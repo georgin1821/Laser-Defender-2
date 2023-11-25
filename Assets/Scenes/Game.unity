@@ -7209,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipsPrefabs:
-  - {fileID: 4798691700310100087, guid: 4a0413513838ac24991d125007bb8a6f, type: 3}
+  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
   - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
   scrollingBgsPrefabs:
   - {fileID: 6964077115915404065, guid: 756dcc3f48ef38840a01ee24c65c2c3b, type: 3}

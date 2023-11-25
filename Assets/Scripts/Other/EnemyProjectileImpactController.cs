@@ -7,7 +7,7 @@ public class EnemyProjectileImpactController : MonoBehaviour
 
     /// ? needs that?
     /// </summary>
-    [SerializeField] AudioType audioType;
+    [SerializeField] AudioType impactAudio;
 
     private void Start()
     {
@@ -19,9 +19,9 @@ public class EnemyProjectileImpactController : MonoBehaviour
     {
         VFXController.instance.EnemyLaserImpact(transform);
 
-        if (audioType != AudioType.None)
+        if (impactAudio != AudioType.None)
         {
-            AudioController.Instance.PlayAudio(audioType);
+            AudioController.Instance.PlayAudio(impactAudio);
         }
         Destroy(gameObject);
     }
@@ -37,9 +37,9 @@ public class EnemyProjectileImpactController : MonoBehaviour
             Player.Instance.DamagePlayer();
             VFXController.instance.EnemyLaserImpact(transform);
 
-            if (audioType != AudioType.None)
+            if (impactAudio != AudioType.None)
             {
-                AudioController.Instance.PlayAudio(audioType);
+                AudioController.Instance.PlayAudio(impactAudio);
             }
             Destroy(gameObject);
         }

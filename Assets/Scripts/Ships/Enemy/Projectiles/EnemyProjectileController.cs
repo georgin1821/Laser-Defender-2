@@ -6,35 +6,25 @@ public class EnemyProjectileController : MonoBehaviour
 {
 
     [SerializeField] float speed;
-    [SerializeField] bool isTargetingPlayer;
+    [SerializeField] int chanceToFireAtPlayer = 10;
 
-    Vector3 target, dir;
-    Quaternion rot;
 
     private void Start()
     {
-        if (Player.Instance != null)
+        if (Random.Range(1, 100) <= chanceToFireAtPlayer)
         {
-            target = Player.Instance.transform.position;
-
-            if (isTargetingPlayer)
+            if (Player.Instance != null)
             {
-                dir = target - transform.position;
+                Vector3 target = Player.Instance.transform.position;
+                Vector3 dir = target - transform.position;
+
                 transform.rotation = Quaternion.FromToRotation(Vector3.down, dir);
             }
-
         }
     }
     void Update()
     {
-        if (isTargetingPlayer)
-        {
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector3.down * Time.deltaTime * speed, Space.World);
-        }
+         transform.Translate(Vector3.down * speed * Time.deltaTime);
     }
 
 }

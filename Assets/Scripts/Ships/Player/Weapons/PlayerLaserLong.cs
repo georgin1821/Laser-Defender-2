@@ -38,7 +38,10 @@ public class PlayerLaserLong : MonoBehaviour
     {
         GamePlayController.OnGameStateChange += OnGameStateChangeHandler;
     }
-
+    private void OnDestroy()
+    {
+        GamePlayController.OnGameStateChange -= OnGameStateChangeHandler;
+    }
     private void OnGameStateChangeHandler(GameState state)
     {
         switch(state)
