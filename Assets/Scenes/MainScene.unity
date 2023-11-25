@@ -322,10 +322,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
       objectReference: {fileID: 0}
@@ -5019,7 +5015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1013944535
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15992,8 +15988,8 @@ SceneRoots:
   - {fileID: 741878768}
   - {fileID: 1899128534}
   - {fileID: 963942817}
-  - {fileID: 787637878}
+  - {fileID: 7860985616909229426}
   - {fileID: 2064543578}
   - {fileID: 38509111}
-  - {fileID: 7860985616909229426}
   - {fileID: 1557545924}
+  - {fileID: 787637878}

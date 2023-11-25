@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public sealed class GamePlayController : SimpleSingleton<GamePlayController>
@@ -7,9 +8,7 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
     //public static GamePlayController instance;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject[] shipsPrefabs = new GameObject[1];
-
-    private int aliveShips = 2; // draft for testing
+    private GameObject[] shipsPrefabs;
 
     [SerializeField] private GameObject[] scrollingBgsPrefabs;
 
@@ -28,9 +27,10 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
     private AudioType victoryClip;
     private GameObject[] sbgGameObjects;
     private AudioType soundtrack;
-    public GameObject playerPrefab;
-    private Vector3 shipStartingPos = new Vector3(0, -6, 0);
+    GameObject playerPrefab;
+    private Vector3 shipStartingPos = new Vector3(0, -10, 0);
     private int levelScore;
+    private int currentSquadShip = 0;
 
     //int batterySpend;
     public int ShipPower { get; private set; }
@@ -40,12 +40,14 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
     protected override void Awake()
     {
         base.Awake();
-        GameDataManager.Instance.Save();
+        // GameDataManager.Instance.Save();
     }
 
 
     private void Start()
     {
+        shipsPrefabs = new GameObject[GameDataManager.Instance.squad.Length];
+
         InitializeGame();
 
         victoryClip = AudioType.victory;
@@ -59,7 +61,7 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
     {
         /* ------REFACTORING depends from other app systems-------
          */
-        SelectShipPrefabSetShipPower();
+        SetSquadPrefabs();
         SetLevelDifficulty();
     }
 
@@ -76,6 +78,9 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
                 WaveSpawner.Instance.DestroyWaves();
 
                 //Instantiation
+                playerPrefab = shipsPrefabs[currentSquadShip];
+                ShipPower = GameDataManager.Instance.shipsPower[currentSquadShip];
+
                 InstantiateScrollingBackgrounds();
                 InstantiatePlayer();
 
@@ -130,15 +135,20 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
                 break;
 
             case GameState.PLAYERDEATH:
-                if (aliveShips > 0)
+                currentSquadShip++;
+                if (currentSquadShip >= shipsPrefabs.Length)
                 {
-                    // Destroy(Player.Instance.gameObject);
-                    //  playerPrefab = shipsPrefabs[1];
-                    // Instantiate(playerPrefab, shipStartingPos, Quaternion.identity);
-                    // StartCoroutine(PlayerStartingAnim());
-
                     UpdateState(GameState.DEFEAT);
+                    return;
                 }
+                Destroy(Player.Instance.gameObject);
+                Player.Instance.DestroySingleton();
+                PlayerController.Instance.DestroySingleton();
+                playerPrefab = shipsPrefabs[currentSquadShip];
+                Instantiate(playerPrefab, shipStartingPos, Quaternion.identity);
+                StartCoroutine(PlayerStartingAnim(false));
+                Player.Instance.ShieldsUp();
+                UpdateState(GameState.PLAY);
                 break;
 
             case GameState.DEFEAT:
@@ -185,16 +195,16 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
         levelScore += scoreValue;
         StartCoroutine(GameUIController.Instance.UpdateScoreRoutine(startScore, Score));
     }
-
-
     //LevelUpSystem
-    private void SelectShipPrefabSetShipPower()
+    private void SetSquadPrefabs()
     {
-        int index = GameDataManager.Instance.selectedShip;
-        playerPrefab = shipsPrefabs[index];
-        ShipPower = GameDataManager.Instance.shipsPower[index];
-    }
 
+        for (int i = 0; i < GameDataManager.Instance.squad.Length; i++)
+        {
+            shipsPrefabs[i] = GameDataManager.Instance.shipsPrefab[GameDataManager.Instance.squad[i]];
+        }
+
+    }
     public void SetLevelDifficulty()
     {
         gameDifficulty = GameDataManager.Instance.currentDifficulty;
@@ -214,7 +224,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
                 break;
         }
     }
-
     private void InstantiateScrollingBackgrounds()
     {
         sbgGameObjects = new GameObject[scrollingBgsPrefabs.Length];
@@ -226,7 +235,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
 
         OnScrollingBGEnabled?.Invoke();
     }
-
     private void InstantiatePlayer()
     {
         Player player = FindAnyObjectByType<Player>();
@@ -236,12 +244,10 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
             Instantiate(playerPrefab, shipStartingPos, Quaternion.identity);
         }
     }
-
     public void BeginIntroSequence(bool isRiviving)
     {
         StartCoroutine(PlayerStartingAnim(isRiviving));
     }
-
     private void DestroyLevel()
     {
         // destroy enemies objects and scrolling bgs objs at scene
@@ -261,7 +267,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
             }
         }
     }
-
     private IEnumerator PlayerStartingAnim(bool isRiviving)
     {
         andOfAnimation = false;
@@ -295,7 +300,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
         }
 
     }
-
     private IEnumerator LoadNextLvlWithDelay()
     {
         yield return new WaitForSecondsRealtime(3);
@@ -304,7 +308,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
         LoadingWithFadeScenes.Instance.LoadScene("LevelSelect");
 
     }
-
     private void PlayClipWithFade(AudioType clip)
     {
         if (clip != AudioType.None)
@@ -312,7 +315,6 @@ public sealed class GamePlayController : SimpleSingleton<GamePlayController>
             AudioController.Instance.PlayAudio(clip, true);
         }
     }
-
     private void StopAudioWithFade(AudioType clip)
     {
         if (clip != AudioType.None)

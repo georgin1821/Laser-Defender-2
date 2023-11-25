@@ -357,16 +357,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405216bedd9cced4a97378ccd5ab784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  scoreValue: 100
   projectilePrefab: {fileID: 165506286884226736, guid: ddc99ffdd2325334ea0001908ac31cb1, type: 3}
+  health: 500
+  scoreValue: 100
   deathVFX: {fileID: 6617642959616773722, guid: 2cf4d65aab4c3b04ea5370f64f723fc4, type: 3}
   shipSound: 0
   chanchToDropPower: 4
   chanceOfDropingGold: 4
   chanceOfDropMultipleCoins: 0
   chanseOfDropGems: 4
-  cointToSpwan: 0
+  cointToSpawn: 0
 --- !u!114 &22746375996811547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,8 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a69c913a2d274b45af346824140eaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToFire: 10
   prjectilePrefab: {fileID: 165506286884226736, guid: ddc99ffdd2325334ea0001908ac31cb1, type: 3}
+  chanceToFire: 10
   delayToShoot: 1
   repeatTime: 1
 --- !u!1 &8586712860536768756

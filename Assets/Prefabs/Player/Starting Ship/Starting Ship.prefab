@@ -5030,10 +5030,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!82 &-1574814604773219863
 AudioSource:
@@ -5166,7 +5166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlwaysShooting: 1
-  collideWithEnemy: 0
+  collideWithEnemy: 1
   isAbleToFire: 1
   engineVFX: {fileID: 8406044671327542910}
   shootingFlames: {fileID: 1059050182630161250}
@@ -5200,7 +5200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bde9f91f0f309648b2fea47c4480844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponUpgrades: 4
+  weaponUpgrades: 1
   msBetweenShots: 100
   bulletVelocity: 6
   isBurstShooting: 0

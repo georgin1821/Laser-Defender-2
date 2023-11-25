@@ -2,20 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coins : MonoBehaviour
+public class CoinsController : SimpleSingleton<CoinsController> 
 {
-    public static Coins instance;
 
     [SerializeField] GameObject coinPrefab;
 
     float rfPosX = 0.5f;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
     public void DropGold(Transform trans, bool multipleCoins, int coins)
     {
         if (multipleCoins)

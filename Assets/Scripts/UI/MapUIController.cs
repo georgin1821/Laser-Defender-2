@@ -55,13 +55,13 @@ public class MapUIController : MonoBehaviour
     void InitializeLevelMenu()
     {
         bool[] levels = GameDataManager.Instance.levels.ToArray();
-
+        levelStarGameObjects = new GameObject[levels.Length];
         for (int i = 0; i < levels.Length; i++)
         {
-            levelStarGameObjects[i].transform.GetChild(0).gameObject.SetActive(false);
-            levelStarGameObjects[i].transform.GetChild(1).gameObject.SetActive(false);
-            levelStarGameObjects[i].transform.GetChild(2).gameObject.SetActive(false);
-            levelStarGameObjects[i].transform.GetChild(3).gameObject.SetActive(false);
+            //levelStarGameObjects[i].transform.GetChild(0).gameObject.SetActive(false);
+            //levelStarGameObjects[i].transform.GetChild(1).gameObject.SetActive(false);
+            //levelStarGameObjects[i].transform.GetChild(2).gameObject.SetActive(false);
+            //levelStarGameObjects[i].transform.GetChild(3).gameObject.SetActive(false);
 
             if (levels[i])
             {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class IPlayerWeapon : MonoBehaviour
 {
-   [SerializeField] private int weaponUpgrades;
+   [SerializeField][Range(0, 1)] private int weaponUpgrades;
 
     public int WeaponUpgrades
     {

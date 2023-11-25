@@ -10,36 +10,37 @@ using UnityEngine;
 
 public class GameDataManager : Singleton<GameDataManager>
 {
-    public int LevelScore { get; set; }
-    public int LevelCoins { get; set; }
-    public int LevelIndex { get; set; }
-    public DateTime currentTime { get; set; }
-    public DateTime nextSessionTime;
+  [HideInInspector]  public int LevelScore { get; set; }
+    [HideInInspector] public int LevelCoins { get; set; }
+    [HideInInspector] public int LevelIndex { get; set; }
+    [HideInInspector] public DateTime currentTime { get; set; }
+    [HideInInspector] public DateTime nextSessionTime;
     //Data
-    public int selectedShip;
-    public int gems;
-    public int batteryLife;
-    public bool isGameStartedFirstTime;
-    public List<bool> levels;
-    public LevelCompletedDifficulty[] levelCompletedDifficulty;
-    public int coins;
-    private int shipsCount = 5;
-    private int levelsCount = 15;
-    private int levelsComplete = 0;
-    public int squadsUnlocked = 1;
-    public int[] squad;
-    public List<bool> unlockedShips;  //bool to true to unlock a ship in the array
-    public List<int> shipsPower;
-    public List<int> shipsRank;
-    public List<string> shipsName;
-    public DateTime sessionTime;
-    public int enemiesKilled;
-    public float musicVolume;
-    public float soundVolume;
-    public GameDifficulty currentDifficulty;
-    public bool[] dailyRewards;
-    public bool[][] shipsSkills;
-    public int CurrentLevel { get; set; }
+    [HideInInspector] public int selectedShip;
+    [HideInInspector] public int gems;
+    [HideInInspector] public int batteryLife;
+    [HideInInspector] public bool isGameStartedFirstTime;
+    [HideInInspector] public List<bool> levels;
+    [HideInInspector] public LevelCompletedDifficulty[] levelCompletedDifficulty;
+    [HideInInspector] public int coins;
+     private int shipsCount = 5;
+    [HideInInspector] private int levelsCount = 15;
+    [HideInInspector] private int levelsComplete = 0;
+    [HideInInspector] public int squadsUnlocked = 1;
+    [HideInInspector] public int[] squad;
+    [HideInInspector] public List<bool> unlockedShips;  //bool to true to unlock a ship in the array
+    [HideInInspector] public List<int> shipsPower;
+    [HideInInspector] public List<int> shipsRank;
+    [HideInInspector] public List<string> shipsName;
+    [HideInInspector] public DateTime sessionTime;
+    [HideInInspector] public int enemiesKilled;
+    [HideInInspector] public float musicVolume;
+    [HideInInspector] public float soundVolume;
+    [HideInInspector] public GameDifficulty currentDifficulty;
+    [HideInInspector] public bool[] dailyRewards;
+    [HideInInspector] public bool[][] shipsSkills;
+    [HideInInspector] public int CurrentLevel { get; set; }
+    public List<GameObject> shipsPrefab; 
 
     private GameData data;
     private LevelCompletedDifficulty gameDifficulty;
@@ -161,6 +162,8 @@ public class GameDataManager : Singleton<GameDataManager>
             data.SoundVolume = soundVolume;
             data.DailyRewards = dailyRewards;
             data.Squad = squad;
+            data.ShipsPrefab = shipsPrefab;
+
 
             Save();
             Load();
@@ -196,6 +199,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 data.Skills = shipsSkills;
                 data.DailyRewards = dailyRewards;
                 data.Squad = squad;
+                data.ShipsPrefab = shipsPrefab;
 
                 bf.Serialize(file, data);
             }
@@ -276,6 +280,8 @@ public enum ShipsNameEnum
 [Serializable]
 class GameData
 {
+    public List<GameObject> ShipsPrefab { get; set; }
+
     public int SelectedShip { get; set; }
     public int[] Squad { get; set; }
     public int Coins { get; set; }

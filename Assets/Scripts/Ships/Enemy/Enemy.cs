@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             Die();
             OnDieDropPower();
             OnDieDropGold();
-            OnDiewDropGems();
+            OnDiewDropGems(); //Rework
         }
     }
     public void ProccessHitLaser(float damage)
@@ -81,21 +81,21 @@ public class Enemy : MonoBehaviour
         if (UnityEngine.Random.Range(1, 100) <= chanceOfDropingGold)
         {
             multipleCoins = UnityEngine.Random.Range(1, 100) <= chanceOfDropMultipleCoins;
-            Coins.instance.DropGold(this.transform, multipleCoins, cointToSpawn);
+            CoinsController.Instance.DropGold(this.transform, multipleCoins, cointToSpawn);
         }
     }
     private void OnDieDropPower()
     {
         if (UnityEngine.Random.Range(1, 100) <= chanchToDropPower)
         {
-            PowerUpController.instance.InstatiateRandomPower(this.transform);
+            PowerUpController.Instance.InstatiateRandomPower(this.transform);
         }
     }
     private void OnDiewDropGems()
     {
         if (UnityEngine.Random.Range(1, 100) <= chanchToDropPower)
         {
-            PowerUpController.instance.InstatiateRandomPower(this.transform);
+            PowerUpController.Instance.InstatiateRandomPower(this.transform);
         }
     }
     private void Die()
@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
         EnemyCount.instance.Count--;
         GamePlayController.Instance.AddToScore(scoreValue);
         AudioController.Instance.PlayAudio(AudioType.EnemyDeathSound);
-        VFXController.instance.EnemyDeath(transform);
+        VFXController.Instance.EnemyDeath(transform);
         Destroy(gameObject);
     }
     private void SetLevelOfDifficulty()

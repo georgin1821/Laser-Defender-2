@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
-    [SerializeField] float backgroundScrollSpeed = 0.5f;
-    [SerializeField] float introSpeed;
+    [SerializeField] private float backgroundScrollSpeed = 0.5f;
+    [SerializeField] private float introSpeed;
+    [SerializeField] private float duration = 3f;
+    // [SerializeField] int parallaxOrder; to iplement
 
-    float speed;
-    float duration = 3f;
-    bool isStatring = false;
-
-
+    private float speed;
+    private bool isStatring;
+    private float distance;
+    private Vector3 staringPos;
     private void Awake()
     {
         GamePlayController.OnScrollingBGEnabled += OnScrollingBGEnabledHandler;
+        distance = GetComponentInChildren<SpriteRenderer>().size.y;
     }
 
     private void OnDestroy()
@@ -27,13 +29,17 @@ public class BackgroundScroller : MonoBehaviour
     {
         IntroScrollingBG();
     }
+    private void Start()
+    {
+        staringPos = new Vector3(0, 0, transform.position.z);
+        transform.position = staringPos;
 
+    }
     void Update()
     {
-
-        if (transform.position.y < -14.66)
+        if (transform.position.y < -distance)
         {
-            transform.transform.position = new Vector3(transform.position.x, 14.66f, transform.position.z);
+            transform.position = staringPos;
         }
         if (isStatring) return;
 
@@ -48,11 +54,11 @@ public class BackgroundScroller : MonoBehaviour
     IEnumerator IntroScrollingRoutine()
     {
         isStatring = true;
-        
+
         float time = 0;
-        while (time <= 3)
+        while (time <= duration)
         {
-           speed = Mathf.Lerp(introSpeed, backgroundScrollSpeed,  time / duration);
+            speed = Mathf.Lerp(introSpeed, backgroundScrollSpeed, time / duration);
             transform.Translate(Vector3.down * speed * Time.deltaTime);
             time += Time.deltaTime;
             yield return null;

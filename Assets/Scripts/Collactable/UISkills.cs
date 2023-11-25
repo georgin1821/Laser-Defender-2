@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UI_Skills : MonoBehaviour
+public class UISkills : MonoBehaviour
 {
     [SerializeField] GameObject skillPrefab, skillButton;
     [SerializeField] Image fillImage;

@@ -17,7 +17,7 @@ public class EnemyProjectileImpactController : MonoBehaviour
 
     public void ImapctProcess()
     {
-        VFXController.instance.EnemyLaserImpact(transform);
+        VFXController.Instance.EnemyLaserImpact(transform);
 
         if (impactAudio != AudioType.None)
         {
@@ -35,7 +35,7 @@ public class EnemyProjectileImpactController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Player.Instance.DamagePlayer();
-            VFXController.instance.EnemyLaserImpact(transform);
+            VFXController.Instance.EnemyLaserImpact(transform);
 
             if (impactAudio != AudioType.None)
             {

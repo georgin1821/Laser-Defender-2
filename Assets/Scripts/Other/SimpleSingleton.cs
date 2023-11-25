@@ -40,4 +40,8 @@ public class SimpleSingleton<T> : MonoBehaviour where T : SimpleSingleton<T>
             instance = null;
         }
     }
+    public void DestroySingleton()
+    {
+        instance = (T)null;
+    }
 }

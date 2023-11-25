@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinController : MonoBehaviour
+public class Coin : MonoBehaviour
 {
     [SerializeField] float forwardSpeed;
     [SerializeField] float playerRange;
     [SerializeField] float smoothTime;
-    public float acelaration;
 
     private Vector3 velocity = Vector3.zero;
-    private Animator anim;
     private float rfSpeed = .2f;
 
     private float speed = -1f;

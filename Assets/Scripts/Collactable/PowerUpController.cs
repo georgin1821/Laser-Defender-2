@@ -2,25 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpController : MonoBehaviour
+public class PowerUpController : SimpleSingleton<PowerUpController>
 {
-    public static PowerUpController instance;
 
     [SerializeField] private PowersArray[] powers;
 
-    float acumWeight;
-    float random;
+    private float acumWeight;
+    private float random;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
     private void Start()
     {
-        AccumulatedWieht();
+        AccumulatedWeight();
     }
 
     public void InstatiateRandomPower(Transform posTrnsform)
@@ -42,18 +34,13 @@ public class PowerUpController : MonoBehaviour
             return null;
     }
 
-    private void AccumulatedWieht()
+    private void AccumulatedWeight()
     {
         foreach (var item in powers)
         {
             acumWeight += item.weight;
             item.accumWeight = acumWeight;
         }
-    }
-    public PowersArray GetValue(int index)
-    {
-        // Perform any validation checks here.
-        return powers[index];
     }
 }
 

@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025272162233380950}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: -5, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9025272162233380949
 MonoBehaviour:
@@ -48,19 +48,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedShip: 0
-  coins: 0
   gems: 0
   batteryLife: 0
   isGameStartedFirstTime: 0
   levels: 
-  ships: 
+  levelCompletedDifficulty: 
+  coins: 0
+  squadsUnlocked: 1
+  squad: 
+  unlockedShips: 
   shipsPower: 
   shipsRank: 
+  shipsName: []
   enemiesKilled: 0
   musicVolume: 0
   soundVolume: 0
   currentDifficulty: 0
   dailyRewards: 
+  shipsPrefab:
+  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
+  - {fileID: 4798691700310100087, guid: 747bf6cf4321d82478f1011ed9bcd386, type: 3}
+  - {fileID: 4798691700310100087, guid: 3952944a042a10a4e9a36741c03cf59c, type: 3}
+  - {fileID: 4798691700310100087, guid: 4a0413513838ac24991d125007bb8a6f, type: 3}
+  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
 --- !u!114 &3776361749122958984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +92,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025272162233380950}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 664bbc0c99ae8f44aaf7a118366227ed, type: 3}
   m_Name: 

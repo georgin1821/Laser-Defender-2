@@ -12,7 +12,7 @@ public abstract class PlayerPowersControllerAbstract : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-   protected void Update()
+    protected void Update()
     {
         if (Vector3.Distance(Player.Instance.transform.position, this.transform.position) > playerRange)
         {
@@ -32,11 +32,7 @@ public abstract class PlayerPowersControllerAbstract : MonoBehaviour
         {
             Destroy(gameObject);
             AudioController.Instance.PlayAudio(collectClip);
-            if (gainPowerVFX != null)
-            {
-                GameObject vfx = Instantiate(gainPowerVFX, Player.Instance.transform.position, Quaternion.identity);
-                Destroy(vfx, 1.5f);
-            }
+            GameObject vfx = Instantiate(gainPowerVFX, Player.Instance.transform.position, Quaternion.identity);
         }
     }
 

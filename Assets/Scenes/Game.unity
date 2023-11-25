@@ -230,7 +230,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 512998088}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AdsMobManager, Assembly-CSharp
         m_MethodName: ShowRewardedAd
         m_Mode: 1
@@ -2812,23 +2812,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 220726365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &512998082 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9025272162233380950, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
-  m_PrefabInstance: {fileID: 9025272161855601355}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &512998088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512998082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99bce37435e78b34cbf6dba98f128db7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &513641404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,6 +4705,34 @@ PrefabInstance:
     - target: {fileID: 5834951468912322591, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
       propertyPath: m_Name
       value: FPS Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951469663159236, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 258.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951469663159236, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 56.856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951469663159236, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 20.993
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951469663159236, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.427
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951469663159237, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_margin.w
+      value: -0.6407442
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951470169877251, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_fontSize
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834951470169877251, guid: a4a408a3bf78d42448d7a0421122acbb, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7208,9 +7219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d674aefef4de9034e96e82e17fde4333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsPrefabs:
-  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
-  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
   scrollingBgsPrefabs:
   - {fileID: 6964077115915404065, guid: 756dcc3f48ef38840a01ee24c65c2c3b, type: 3}
   - {fileID: 246783898490487758, guid: 679973b9093a70a4e889079ab7491f28, type: 3}
@@ -7220,7 +7228,6 @@ MonoBehaviour:
   Score: 0
   levelCoins: 0
   Difficulty: 0
-  playerPrefab: {fileID: 0}
   andOfAnimation: 0
 --- !u!114 &1328183885
 MonoBehaviour:
@@ -7287,7 +7294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: 546e76b99ef184945b84c20b16d69d84, type: 2}
+  - {fileID: 11400000, guid: 2db0354c57eaa5f4e8e6ae2a838dcd9c, type: 2}
   - {fileID: 11400000, guid: 87cbf0093c403ca4f9679aecc9e3c5a1, type: 2}
 --- !u!114 &1328183893
 MonoBehaviour:
@@ -16346,11 +16353,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3776361749122958984, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: isSpeedLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9025272162233380948, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16399,10 +16402,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9025272162233380950, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 512998088}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70ece082b4ff1a14dbb26d738c4d2063, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(Rigidbody))]
-public class Player : SimpleSingleton<Player>, IDamageable
+public class Player : SimpleSingleton<Player>
 {
     [Header("GameDev Settings")]
     public bool isAlwaysShooting = true;
@@ -133,14 +133,11 @@ public class Player : SimpleSingleton<Player>, IDamageable
 
     public void ShieldsUp()
     {
-        if (GamePlayController.Instance.state == GameState.PLAY)
-        {
             if (co != null)
             {
                 StopCoroutine(co);
             }
             co = StartCoroutine(ShieldsCountDown());
-        }
     }
 
     public void UpgradeGun()

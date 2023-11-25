@@ -43,7 +43,7 @@ public class Boss : MonoBehaviour
     private void OnDieDropGold()
 
     {
-        Coins.instance.DropGold(this.transform, true, 1);
+        CoinsController.Instance.DropGold(this.transform, true, 1);
     }
 
     private void Die()
