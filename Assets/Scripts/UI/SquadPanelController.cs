@@ -12,11 +12,14 @@ public class SquadPanelController : MonoBehaviour
     private int selectedShip;
     [SerializeField] TMP_Text powerText, upgradeInfo, coinsText;
     [SerializeField] Sprite[] sprites;
-    [SerializeField] Button shipBtn;
+    [SerializeField] Button shipBtn, squad1, squad2, squad3;
 
     private void Start()
     {
-        powerText.text = GameDataManager.Instance.shipsPower[selectedShip].ToString();
+        //powerText.text = GameDataManager.Instance.shipsPower[selectedShip].ToString();
+        squad1.gameObject.GetComponent<Image>().sprite = sprites[0];
+        squad2.gameObject.GetComponent<Image>().sprite = sprites[1];
+        squad3.gameObject.GetComponent<Image>().sprite = sprites[2];
 
     }
     public void SelectShip()

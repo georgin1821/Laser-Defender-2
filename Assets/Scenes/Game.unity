@@ -2829,7 +2829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bce37435e78b34cbf6dba98f128db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appID: ca-app-pub-2066779871986916~3498101778
 --- !u!1 &513641404
 GameObject:
   m_ObjectHideFlags: 0
@@ -7210,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipsPrefabs:
-  - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
+  - {fileID: 4798691700310100087, guid: 4a0413513838ac24991d125007bb8a6f, type: 3}
   - {fileID: 4798691700310100087, guid: 5f15cd99db2f9094ab247d0e4e80de3d, type: 3}
   scrollingBgsPrefabs:
   - {fileID: 6964077115915404065, guid: 756dcc3f48ef38840a01ee24c65c2c3b, type: 3}
@@ -7288,7 +7287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: 2db0354c57eaa5f4e8e6ae2a838dcd9c, type: 2}
+  - {fileID: 11400000, guid: 546e76b99ef184945b84c20b16d69d84, type: 2}
   - {fileID: 11400000, guid: 87cbf0093c403ca4f9679aecc9e3c5a1, type: 2}
 --- !u!114 &1328183893
 MonoBehaviour:

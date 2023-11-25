@@ -5335,13 +5335,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537ce92f24a9d214bb17064b0c2d650d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engineVFX: {fileID: 0}
-  shootingFlames: {fileID: 1059050182630161250}
-  rocketPrefab: {fileID: 165506286884226736, guid: bc7b3756f256764498dcb582d293fd7b, type: 3}
   isAlwaysShooting: 1
   collideWithEnemy: 0
   isAbleToFire: 1
+  engineVFX: {fileID: 0}
+  shootingFlames: {fileID: 1059050182630161250}
   firePos: {fileID: 1416074892558850024}
+  rocketPrefab: {fileID: 165506286884226736, guid: bc7b3756f256764498dcb582d293fd7b, type: 3}
   targets: []
 --- !u!114 &8296172668688822993
 MonoBehaviour:
@@ -5355,8 +5355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd399a9617679a49bd00bd79e6144f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
   mobileRelease: 0
+  speed: 9
   dir: {x: 0, y: 0}
 --- !u!114 &-8201915063547292903
 MonoBehaviour:
@@ -5370,14 +5370,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bde9f91f0f309648b2fea47c4480844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunUpgrades: 1
-  busrtShootingTimer: 0.8
+  weaponUpgrades: 0
   msBetweenShots: 50
-  isBurstShooting: 1
+  bulletVelocity: 15
+  isBurstShooting: 0
+  busrtShootingTimer: 0.8
+  busrtShootingCooldown: 0
   XposOffset: 0.15
   YposOffset: 0.15
-  projectile: {fileID: 2076028819196686109, guid: 5d1ca55669882b74398fd094d47294d4, type: 3}
-  bulletVelocity: 15
+  projectile: {fileID: 8340228908662691834, guid: 5d1ca55669882b74398fd094d47294d4, type: 3}
 --- !u!1 &5024505935335230161
 GameObject:
   m_ObjectHideFlags: 0

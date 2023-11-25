@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public sealed class GamePlayController : Singleton<GamePlayController>
+public sealed class GamePlayController : SimpleSingleton<GamePlayController>
 {
     //public static GamePlayController instance;
 
@@ -43,18 +43,6 @@ public sealed class GamePlayController : Singleton<GamePlayController>
         GameDataManager.Instance.Save();
     }
 
-    protected override void InitializeInstance()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            Debug.Log("[Singleton] Trying to instantitate a second instance of singleton");
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     private void Start()
     {
@@ -198,6 +186,8 @@ public sealed class GamePlayController : Singleton<GamePlayController>
         StartCoroutine(GameUIController.Instance.UpdateScoreRoutine(startScore, Score));
     }
 
+
+    //LevelUpSystem
     private void SelectShipPrefabSetShipPower()
     {
         int index = GameDataManager.Instance.selectedShip;

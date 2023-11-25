@@ -12,15 +12,15 @@ GameObject:
   - component: {fileID: 3110989688718100205}
   - component: {fileID: 8588036498193354346}
   - component: {fileID: 5775436311870359870}
-  - component: {fileID: 6840418284234231110}
-  - component: {fileID: 1863928483886046760}
+  - component: {fileID: 4696497454736508393}
+  - component: {fileID: 4957647479717227972}
   m_Layer: 7
   m_Name: Bullet_angle_lasser
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9120568621732989917
 Transform:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6840418284234231110
+--- !u!114 &4696497454736508393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,21 +147,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 3118147612646288694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bed6727b41b4494c823f3cf42efec79, type: 3}
+  m_Script: {fileID: 11500000, guid: 79ffaab2dc9264d4d8313c67f2d4cf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRendererLeft: {fileID: 0}
+  lineRendererRight: {fileID: 0}
+  firePointLeft: {fileID: 0}
+  firePointRight: {fileID: 0}
+  shootable:
+    serializedVersion: 2
+    m_Bits: 0
+  timeInShooting: 3
+  cooldownLaser: 0
+  damage: 20
+  impactVFX: {fileID: 0}
+  gunUpgrades: 1
+--- !u!114 &4957647479717227972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118147612646288694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db005305272ee24891ffc949e4f5ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  impactVFX: {fileID: 4916312715566873596, guid: 965ccb5d16b66bd4b8f894f8b605b31a, type: 3}
---- !u!114 &1863928483886046760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3118147612646288694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f71762302e606ce40b9c222f1bbb1472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
+  impactVFX: {fileID: 3944224841401945990, guid: 5cea697c2eff8a241af84d64d97d4468, type: 3}

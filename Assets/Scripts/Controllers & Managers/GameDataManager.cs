@@ -124,7 +124,6 @@ public class GameDataManager : Singleton<GameDataManager>
             }
             levels[1] = true; //test
 
-
             //unlocking first ship locks the others
             for (int i = 0; i < dailyRewards.Length; i++)
             {
@@ -161,6 +160,7 @@ public class GameDataManager : Singleton<GameDataManager>
             data.MusicVolume = musicVolume;
             data.SoundVolume = soundVolume;
             data.DailyRewards = dailyRewards;
+            data.Squad = squad;
 
             Save();
             Load();
@@ -195,6 +195,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 data.SoundVolume = soundVolume;
                 data.Skills = shipsSkills;
                 data.DailyRewards = dailyRewards;
+                data.Squad = squad;
 
                 bf.Serialize(file, data);
             }

@@ -5208,7 +5208,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7585191150c96594fb968561071df543, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -5229,13 +5229,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537ce92f24a9d214bb17064b0c2d650d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engineVFX: {fileID: 0}
-  shootingFlames: {fileID: 1059050182630161250}
-  rocketPrefab: {fileID: 165506286884226736, guid: bc7b3756f256764498dcb582d293fd7b, type: 3}
   isAlwaysShooting: 1
   collideWithEnemy: 0
   isAbleToFire: 1
+  engineVFX: {fileID: 8406044671327542910}
+  shootingFlames: {fileID: 1059050182630161250}
   firePos: {fileID: 1416074892558850024}
+  rocketPrefab: {fileID: 165506286884226736, guid: bc7b3756f256764498dcb582d293fd7b, type: 3}
   targets: []
 --- !u!114 &8296172668688822993
 MonoBehaviour:
@@ -5249,8 +5249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd399a9617679a49bd00bd79e6144f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
   mobileRelease: 0
+  speed: 9
   dir: {x: 0, y: 0}
 --- !u!114 &4352119534960984826
 MonoBehaviour:
@@ -5264,14 +5264,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913224f958c1b024199f892fbdae5474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunUpgrades: 5
-  busrtShootingTimer: 0.8
-  msBetweenShots: 90
+  weaponUpgrades: 3
+  msBetweenShots: 200
+  bulletVelocity: 20
   isBurstShooting: 0
+  busrtShootingTimer: 0.8
+  busrtShootingCooldown: 0
   XposOffset: 0.15
   YposOffset: 0.15
-  projectile: {fileID: 1863928483886046760, guid: 8aeb2e8c6158a994083fa7d08a38d965, type: 3}
-  bulletVelocity: 20
+  projectile: {fileID: 4978195241987942575, guid: 8aeb2e8c6158a994083fa7d08a38d965, type: 3}
   angleBetweenLasers: 5
 --- !u!1 &8406044671327542908
 GameObject:

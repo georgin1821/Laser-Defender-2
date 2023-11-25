@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50ea90a2da60e5348b44935501d79be7, type: 3}
-  m_Name: Level_test
+  m_Name: Level_High_Health
   m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 84b2d07c759066b48af7d7536ca66e3d, type: 2}
-  - {fileID: 11400000, guid: 721da4f5aa1ed8b4390ae8f0146fe834, type: 2}
   musicClip: 7
